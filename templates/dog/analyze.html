@@ -1,0 +1,296 @@
+{% extends 'base.html' %}
+
+{% block title %}狗狗年龄分析 - 上传照片{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/analyze.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5">
+    <!-- 标题区域 -->
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-12">
+            <div class="page-header animate-fade-in text-center">
+                <h1 class="display-5 fw-bold gradient-text mb-3">狗狗年龄智能分析</h1>
+                <p class="lead text-muted mb-4">上传一张清晰的照片，AI将精准估算您爱犬的年龄</p>
+                <div class="d-flex justify-content-center">
+                    <div class="badge bg-primary-light text-primary rounded-pill px-4 py-2 mb-2">
+                        <i class="fas fa-shield-alt me-2"></i>安全可靠的AI分析技术
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <!-- 左侧上传区域 -->
+        <div class="col-lg-8 mb-4 mb-lg-0">
+            <!-- 上传卡片 -->
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden floating-card mb-3">
+                <div class="card-body p-0">
+                    <form method="POST" enctype="multipart/form-data" id="upload-form" class="needs-validation"
+                        novalidate>
+                        {{ form.hidden_tag() }}
+
+                        <div class="upload-container p-4">
+                            {{ form.photo(class="d-none", id="photo") }}
+
+                            <!-- 上传区域 -->
+                            <div class="upload-area glass-effect" id="upload-area">
+                                <div class="upload-content">
+                                    <div class="upload-icon-circle">
+                                        <i class="fas fa-cloud-upload-alt icon-pulse"></i>
+                                    </div>
+                                    <h4 class="upload-title mb-3">拖放照片到这里或点击上传</h4>
+                                    <p class="upload-desc mb-4">支持 JPG, JPEG, PNG 格式，最大 5MB</p>
+                                    <button type="button" class="btn btn-upload btn-primary px-4 py-2">
+                                        <i class="fas fa-folder-open me-2"></i>选择文件
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 预览区域 -->
+                            <div id="preview-container" class="preview-container d-none">
+                                <div class="preview-header">
+                                    <div class="d-flex align-items-center">
+                                        <div class="upload-status-icon">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-0 fw-bold">照片已上传</h5>
+                                            <p class="mb-0 text-muted small">您可以点击分析按钮开始AI分析</p>
+                                        </div>
+                                    </div>
+                                    <button id="reupload-btn" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-redo me-1"></i>重新上传
+                                    </button>
+                                </div>
+                                <div class="preview-body">
+                                    <div class="img-hover-zoom">
+                                        <img id="preview-image" class="img-fluid rounded shadow-sm" alt="预览图">
+                                    </div>
+                                </div>
+                                <div class="preview-footer">
+                                    <button type="submit" class="btn btn-analyze" id="analyze-btn">
+                                        <i class="fas fa-search me-2"></i>开始分析
+                                    </button>
+                                </div>
+                            </div>
+
+                            {% if form.photo.errors %}
+                            <div class="invalid-feedback d-block mt-3">
+                                {% for error in form.photo.errors %}
+                                <div class="alert alert-danger">
+                                    <i class="fas fa-exclamation-circle me-2"></i>{{ error }}
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧提示区域 -->
+        <div class="col-lg-4">
+            <!-- 拍摄提示卡片 -->
+            <div class="card border-0 shadow-sm rounded-4 mb-4 tips-card">
+                <div class="card-header bg-transparent border-0">
+                    <div class="d-flex align-items-center">
+                        <div class="feature-icon-wrapper rounded-circle">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h5 class="mb-0 fw-bold">拍摄提示</h5>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">为获得最准确的分析结果，请遵循以下拍摄建议：</p>
+                    <div class="photo-tips-grid">
+                        <div class="row g-2">
+                            <!-- 提示1 -->
+                            <div class="col-6">
+                                <div class="photo-tip-item d-flex">
+                                    <div class="tip-icon-wrapper bg-info-light text-info rounded-3">
+                                        <i class="fas fa-camera"></i>
+                                    </div>
+                                    <div class="tip-content">
+                                        <h6 class="fw-semibold">清晰正面照</h6>
+                                        <p class="text-muted">确保面部特征清晰可见</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 提示2 -->
+                            <div class="col-6">
+                                <div class="photo-tip-item d-flex">
+                                    <div class="tip-icon-wrapper bg-success-light text-success rounded-3">
+                                        <i class="fas fa-paw"></i>
+                                    </div>
+                                    <div class="tip-content">
+                                        <h6 class="fw-semibold">自然放松</h6>
+                                        <p class="text-muted">无装饰物遮挡面部</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 提示3 -->
+                            <div class="col-6">
+                                <div class="photo-tip-item d-flex">
+                                    <div class="tip-icon-wrapper bg-warning-light text-warning rounded-3">
+                                        <i class="fas fa-sun"></i>
+                                    </div>
+                                    <div class="tip-content">
+                                        <h6 class="fw-semibold">良好光线</h6>
+                                        <p class="text-muted">避免过暗或过曝情况</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 提示4 -->
+                            <div class="col-6">
+                                <div class="photo-tip-item d-flex">
+                                    <div class="tip-icon-wrapper bg-danger-light text-danger rounded-3">
+                                        <i class="fas fa-expand"></i>
+                                    </div>
+                                    <div class="tip-content">
+                                        <h6 class="fw-semibold">适当距离</h6>
+                                        <p class="text-muted">头部在画面中居中</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 保留分析状态卡片的居中布局但减少空白 -->
+<div class="row" id="analysis-status-row">
+    <div class="col-lg-8 mx-auto">
+        <div id="analysis-info-card"
+            class="analysis-card card border-0 shadow-sm rounded-4 d-none mb-3 animate-fade-in">
+            <div class="card-body p-4">
+                <!-- 标题与进度条 -->
+                <div class="d-flex align-items-center mb-2">
+                    <div class="analysis-icon me-3">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h5 class="mb-0 fw-bold">AI分析进行中</h5>
+                    <div class="ms-auto progress-percentage fw-bold">0%</div>
+                </div>
+
+                <!-- 进度条 -->
+                <div id="mini-progress-indicator">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <!-- 状态文本 -->
+                <div class="analysis-status d-inline-block mx-auto">
+                    正在加载分析模型...
+                </div>
+
+                <!-- 三个主要步骤 - 增加左右边距 -->
+                <div class="status-steps d-flex justify-content-between px-3">
+                    <div class="status-step active text-center">
+                        <div class="step-dot mx-auto">
+                            <i class="fas fa-cog fa-spin"></i>
+                        </div>
+                        <div class="step-label">预处理</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="status-step text-center">
+                        <div class="step-dot mx-auto">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <div class="step-label">特征识别</div>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="status-step text-center">
+                        <div class="step-dot mx-auto">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <div class="step-label">年龄预测</div>
+                    </div>
+                </div>
+
+                <!-- 简短说明文本 -->
+                <div class="text-muted small text-center mt-3">
+                    分析时间通常在<strong>10-30秒</strong>内完成，具体时间取决于图像质量和服务器负载
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 注册提示卡片 - 放在下方居中 -->
+{% if not session.get('user_id') %}
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="register-card">
+            <div class="card-body">
+                <div class="text-center">
+                    <div class="register-icon-container">
+                        <div class="register-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                    </div>
+                    <h3 class="register-title">创建您的账户</h3>
+                    <p class="text-muted mb-4">注册账户后，您可以获得更多专属功能和服务</p>
+                </div>
+
+                <div class="register-benefits">
+                    <div class="row row-cols-1 row-cols-md-3 g-4">
+                        <div class="col">
+                            <div class="benefit-card text-center">
+                                <div class="benefit-icon blue">
+                                    <i class="fas fa-history"></i>
+                                </div>
+                                <h6 class="benefit-title">保存分析历史</h6>
+                                <p class="benefit-desc">随时查看您的分析结果</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="benefit-card text-center">
+                                <div class="benefit-icon green">
+                                    <i class="fas fa-paw"></i>
+                                </div>
+                                <h6 class="benefit-title">管理多只爱宠</h6>
+                                <p class="benefit-desc">轻松追踪多只宠物信息</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="benefit-card text-center">
+                                <div class="benefit-icon amber">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <h6 class="benefit-title">健康提醒服务</h6>
+                                <p class="benefit-desc">根据狗狗年龄定制关怀</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('auth.register') }}" class="btn register-btn">
+                        立即注册
+                        <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/analyze.js') }}"></script>
+{% endblock %}

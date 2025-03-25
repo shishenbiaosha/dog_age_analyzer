@@ -1,0 +1,2058 @@
+/* 分析页面特定样式 */
+
+/* 笔记本电脑屏幕尺寸优化 */
+@media (max-width: 1399px) {
+    .upload-area {
+        padding: 2rem 1.5rem;
+    }
+
+    .upload-icon-circle {
+        width: 90px;
+        height: 90px;
+        font-size: 2rem;
+    }
+
+    .upload-title {
+        font-size: 1.4rem;
+    }
+
+    .upload-desc {
+        font-size: 0.95rem;
+    }
+
+    .preview-body img {
+        max-height: 220px;
+    }
+
+    .photo-tip-item {
+        padding: 0.65rem;
+    }
+
+    .photo-tip-item h6 {
+        font-size: 0.85rem;
+    }
+
+    .photo-tip-item p {
+        font-size: 0.75rem;
+    }
+
+    .tip-icon-wrapper {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
+        margin-right: 8px;
+    }
+
+    .register-card {
+        padding: 1.5rem;
+    }
+
+    .benefit-card {
+        padding: 1rem 0.75rem;
+    }
+
+    .benefit-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .photo-tips-grid .col-6 {
+        padding: 0 0.3rem;
+    }
+
+    .preview-header {
+        padding: 0.6rem 1rem;
+    }
+
+    .preview-body {
+        padding: 0.75rem;
+    }
+
+    .preview-footer {
+        padding: 0.6rem 1rem 0.85rem;
+    }
+}
+
+/* 自适应宽屏支持 */
+@media (min-width: 1600px) {
+    .upload-area {
+        padding: 4rem 3rem;
+    }
+
+    .upload-icon-circle {
+        width: 120px;
+        height: 120px;
+        font-size: 3rem;
+    }
+
+    .preview-body img {
+        max-height: 320px;
+    }
+
+    .col-lg-8 {
+        padding-right: 2rem;
+    }
+
+    .col-lg-4 {
+        padding-left: 2rem;
+    }
+}
+
+@media (min-width: 2560px) {
+    .upload-area {
+        padding: 5rem 4rem;
+    }
+
+    .upload-icon-circle {
+        width: 150px;
+        height: 150px;
+        font-size: 3.5rem;
+    }
+
+    .photo-tip-item {
+        padding: 1.5rem 1.2rem;
+    }
+
+    .photo-tip-item h6 {
+        font-size: 1.2rem;
+    }
+
+    .photo-tip-item p {
+        font-size: 1rem;
+    }
+}
+
+/* 进度条容器 */
+.progress-container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 0 20px;
+    display: none;
+}
+
+.progress {
+    height: 20px;
+    border-radius: 10px;
+    background-color: var(--gray-200);
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    border-radius: 10px;
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* 分析状态文本 */
+.analysis-status {
+    text-align: center;
+    margin: 0.75rem auto 1.25rem;
+    font-weight: 500;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #4f46e5;
+    font-size: 0.95rem;
+    background-color: rgba(99, 102, 241, 0.08);
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.analysis-status::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border: 2px solid #6366f1;
+    border-top-color: transparent;
+    border-radius: 50%;
+    margin-right: 10px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 增加一些辅助性提示内容，让进度条区域更丰富 */
+.analysis-help-text {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    gap: 1rem;
+}
+
+.analysis-help-item {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #6c757d;
+    background-color: rgba(99, 102, 241, 0.05);
+    padding: 0.35rem 0.75rem;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.analysis-help-item:hover {
+    background-color: rgba(99, 102, 241, 0.1);
+    transform: translateY(-2px);
+}
+
+.analysis-help-item i {
+    margin-right: 0.5rem;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+}
+
+/* 将左侧上传区域卡片底部内边距缩小 */
+.card-body.p-0 .upload-container {
+    padding-bottom: 1.5rem;
+}
+
+/* 预览区域底部内边距调整 */
+.preview-footer {
+    padding: 1rem 1.5rem 1.5rem;
+}
+
+/* 分析完成动画 */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.analysis-complete {
+    animation: pulse 0.5s ease-in-out;
+}
+
+/* 禁用按钮样式 */
+.btn-analyzing {
+    background-color: var(--gray-400) !important;
+    border-color: var(--gray-400) !important;
+    cursor: not-allowed;
+    color: white !important;
+}
+
+/* 渐变文字 */
+.gradient-text {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 上传容器 */
+.upload-container {
+    position: relative;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* 上传区域 */
+.upload-area {
+    border: 2px dashed rgba(99, 102, 241, 0.1) !important;
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.upload-area:hover {
+    border: 2px dashed #6366f1 !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.upload-content {
+    position: relative;
+    z-index: 2;
+}
+
+.upload-icon-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.upload-icon-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.2) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+    margin: 0 auto 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.upload-area:hover .upload-icon-circle {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
+}
+
+.upload-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+}
+
+.upload-desc {
+    color: var(--gray-600);
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.btn-upload {
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2);
+}
+
+.btn-upload:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+}
+
+/* 玻璃效果 */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-effect::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 70%);
+    transform: rotate(30deg);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 预览容器 */
+.preview-container {
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.preview-container:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.9rem 1.5rem;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    background: linear-gradient(to right, rgba(52, 211, 153, 0.08), rgba(255, 255, 255, 0));
+    position: relative;
+}
+
+.preview-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #10b981, #4ade80);
+    opacity: 0.9;
+}
+
+/* 上传状态显示区域 */
+.preview-header .d-flex {
+    position: relative;
+    padding-left: 0.5rem;
+}
+
+/* 上传状态图标样式 */
+.upload-status-icon {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: #ffffff;
+    margin-right: 14px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(16, 185, 129, 0.4);
+    animation: statusPulse 2s infinite ease-in-out;
+    position: relative;
+}
+
+.upload-status-icon::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background: rgba(16, 185, 129, 0.25);
+    z-index: -1;
+    animation: statusPulseRing 2s infinite ease-in-out;
+}
+
+@keyframes statusPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes statusPulseRing {
+    0% {
+        opacity: 0.7;
+        transform: scale(0.95);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 0.7;
+        transform: scale(0.95);
+    }
+}
+
+/* 上传状态标题样式 */
+.preview-header h5 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #212529;
+    margin: 0;
+    line-height: 1.4;
+    letter-spacing: 0.3px;
+}
+
+.preview-body {
+    padding: 1rem 1.25rem;
+    text-align: center;
+    background-color: rgba(249, 250, 251, 0.6);
+}
+
+.preview-body img {
+    max-height: 220px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    object-fit: contain;
+}
+
+.img-hover-zoom {
+    overflow: hidden;
+    border-radius: 12px;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.preview-body img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.preview-footer {
+    padding: 1rem 1.5rem 1.25rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(99, 102, 241, 0.05));
+    text-align: center;
+}
+
+.btn-analyze {
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.btn-analyze:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    color: white;
+}
+
+.btn-analyze:focus,
+.btn-analyze:active {
+    color: white !important;
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(99, 102, 241, 0.25);
+}
+
+/* 帮助容器 */
+.help-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* 提示容器 */
+.tips-container {
+    padding: 0.5rem;
+}
+
+.tip-item {
+    display: flex;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.tip-item:last-child {
+    border-bottom: none;
+}
+
+.tip-item:hover {
+    background-color: rgba(99, 102, 241, 0.03);
+    transform: translateX(5px);
+}
+
+.tip-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0.2) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-right: 1rem;
+    flex-shrink: 0;
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.15);
+    transition: all 0.3s ease;
+}
+
+.tip-item:hover .tip-icon {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+}
+
+.tip-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.tip-content h6 {
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.tip-content p {
+    color: var(--gray-600);
+    margin-bottom: 0;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.feature-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0.3) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: white;
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2);
+}
+
+/* 提示卡片样式 */
+.tips-card {
+    border-radius: 1.2rem !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+    background: #ffffff;
+    border: none !important;
+    overflow: hidden;
+}
+
+.tips-card .card-header {
+    background: linear-gradient(145deg, rgba(99, 102, 241, 0.08), rgba(249, 115, 22, 0.08));
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1.25rem 1.5rem 1rem;
+}
+
+.feature-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white !important;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25);
+    margin-right: 1rem;
+}
+
+.feature-icon-wrapper i {
+    font-size: 1.3rem;
+    color: white;
+}
+
+.tips-card .card-body {
+    padding: 1.25rem 1.5rem;
+}
+
+.tips-card .card-body p.text-muted {
+    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
+}
+
+/* 提示网格优化 */
+.photo-tips-grid {
+    margin-top: 0.5rem;
+}
+
+.photo-tips-grid .row {
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+}
+
+.photo-tips-grid .col-6 {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+}
+
+/* 提示项改进 - 确保足够的空间 */
+.photo-tip-item {
+    padding: 0.8rem 0.75rem;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+    background-color: rgba(249, 250, 251, 0.5);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.photo-tip-item:hover {
+    background-color: rgba(249, 250, 251, 0.9);
+    transform: translateY(-2px);
+    border-color: rgba(203, 213, 225, 0.8);
+}
+
+/* 照片提示图标 */
+.tip-icon-wrapper {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+/* 照片提示文字容器 */
+.tip-content {
+    flex: 1;
+    min-width: 0;
+    /* 允许内容缩小以适应容器 */
+    max-width: calc(100% - 40px);
+}
+
+/* 照片提示标题 */
+.photo-tip-item h6 {
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+    color: var(--text-color);
+    font-weight: 600;
+    white-space: nowrap;
+    /* 防止标题换行 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 照片提示描述 */
+.photo-tip-item p {
+    font-size: 0.75rem;
+    margin-bottom: 0;
+    color: var(--text-light);
+    line-height: 1.3;
+}
+
+/* 使用新的高对比度背景色 */
+.bg-info-light {
+    background: rgba(0, 149, 255, 0.15) !important;
+}
+
+.bg-success-light {
+    background: rgba(16, 122, 51, 0.15) !important;
+}
+
+.bg-warning-light {
+    background: rgba(236, 151, 31, 0.15) !important;
+}
+
+.bg-danger-light {
+    background: rgba(220, 38, 38, 0.15) !important;
+}
+
+/* 使用更高对比度的图标颜色 */
+.text-info {
+    color: #0077cc !important;
+}
+
+.text-success {
+    color: #10b981 !important;
+}
+
+.text-warning {
+    color: #d17f09 !important;
+}
+
+.text-danger {
+    color: #c81e1e !important;
+}
+
+/* 注册卡片蓝色主题样式 */
+.register-card {
+    background: #ffffff;
+    border-radius: 1.5rem;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 120, 215, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.register-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4470ff, #6698ff);
+}
+
+.register-card .card-body {
+    padding: 2.5rem 2rem;
+}
+
+.register-icon-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #e8f0ff, #f5f9ff);
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    position: relative;
+    box-shadow: 0 10px 20px rgba(68, 112, 255, 0.12);
+}
+
+.register-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #4470ff, #6698ff);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.6rem;
+    box-shadow: 0 5px 15px rgba(68, 112, 255, 0.25);
+}
+
+.register-title {
+    color: #333;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.register-benefits {
+    margin: 1.5rem 0;
+}
+
+.benefit-card {
+    background-color: #f8faff;
+    border-radius: 1rem;
+    padding: 1.25rem 1rem;
+    height: 100%;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(68, 112, 255, 0.05);
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(68, 112, 255, 0.1);
+}
+
+.benefit-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.benefit-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.benefit-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.benefit-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    background-color: #ffffff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.benefit-icon.blue {
+    color: #4470ff;
+}
+
+.benefit-icon.green {
+    color: #38b48b;
+}
+
+.benefit-icon.amber {
+    color: #f59e0b;
+}
+
+.benefit-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.benefit-desc {
+    color: #666;
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+.register-btn {
+    background: linear-gradient(135deg, #4470ff, #6698ff);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(68, 112, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(68, 112, 255, 0.3);
+    color: white;
+}
+
+.register-btn:focus,
+.register-btn:active {
+    color: white !important;
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(68, 112, 255, 0.25);
+}
+
+.register-btn i {
+    transition: transform 0.3s ease;
+}
+
+.register-btn:hover i {
+    transform: translateX(5px);
+}
+
+.register-icon i {
+    animation: pulse 2s infinite;
+}
+
+/* 响应式优化 */
+@media (max-width: 991.98px) {
+
+    .col-lg-7,
+    .col-lg-5 {
+        max-width: 100%;
+    }
+
+    .help-container {
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .page-header {
+        padding: 2rem 1rem;
+    }
+
+    .upload-area {
+        padding: 3rem 1.5rem;
+    }
+
+    .upload-icon-circle {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+
+    /* 提示卡片响应式样式 */
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tip-item {
+        padding: 1rem;
+        border-right: none;
+    }
+
+    .tip-item:nth-last-child(2) {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .tip-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        font-size: 1rem;
+        border-radius: 12px;
+    }
+
+    .tip-content h6 {
+        font-size: 0.95rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .tip-content p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    .tips-header {
+        padding: 0.875rem 1.25rem;
+    }
+
+    .tips-header h5 {
+        font-size: 1rem;
+    }
+
+    .feature-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .photo-tips-grid .col-6 {
+        padding-left: 0.15rem;
+        padding-right: 0.15rem;
+    }
+
+    .photo-tip-item {
+        padding: 0.6rem;
+    }
+
+    .tip-icon-wrapper {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+        margin-right: 6px;
+    }
+
+    .photo-tip-item h6 {
+        font-size: 0.8rem;
+    }
+
+    .photo-tip-item p {
+        font-size: 0.7rem;
+    }
+
+    .preview-header h5 {
+        font-size: 1.1rem;
+    }
+
+    .upload-status-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 1.3rem;
+    }
+
+    #reupload-btn {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* 页面标题区域 */
+.page-header {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 70%);
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+    z-index: 0;
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, rgba(249, 115, 22, 0) 70%);
+    border-radius: 50%;
+    transform: translate(-30%, 30%);
+    z-index: 0;
+}
+
+.page-header-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* 提示卡片紧凑样式 */
+.row.g-0 .tip-item {
+    padding: 0.75rem 1rem;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.row.g-0 .tip-icon {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    margin-right: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.row.g-0 .tip-content h6 {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+}
+
+.row.g-0 .tip-content p {
+    margin-bottom: 0;
+    font-size: 0.8rem;
+    line-height: 1.3;
+}
+
+/* 提示卡片动画 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tip-item:nth-child(1) {
+    animation: fadeIn 0.6s ease-out 0.1s both;
+}
+
+.tip-item:nth-child(2) {
+    animation: fadeIn 0.6s ease-out 0.2s both;
+}
+
+.tip-item:nth-child(3) {
+    animation: fadeIn 0.6s ease-out 0.3s both;
+}
+
+.tip-item:nth-child(4) {
+    animation: fadeIn 0.6s ease-out 0.4s both;
+}
+
+/* 图标脉冲动画 */
+@keyframes iconPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.tip-icon i {
+    animation: iconPulse 2s infinite;
+    display: inline-block;
+}
+
+/* 覆盖Bootstrap默认的py-5内边距 */
+.py-5 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+}
+
+/* 右侧提示区域美化 */
+.card.rounded-4 {
+    border-radius: 1.5rem !important;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    overflow: hidden;
+}
+
+.card.rounded-4:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-header::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.feature-icon-wrapper {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2);
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.feature-icon-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border-radius: inherit;
+    opacity: 0.3;
+    filter: blur(3px);
+    z-index: -1;
+}
+
+.feature-icon-wrapper i {
+    font-size: 1.2rem;
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.1));
+}
+
+.photo-tips-grid {
+    position: relative;
+}
+
+.photo-tips-grid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 100%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(99, 102, 241, 0.1), transparent);
+    z-index: 0;
+}
+
+.photo-tip-item {
+    background: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    height: 100%;
+}
+
+.photo-tip-item:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+}
+
+.photo-tip-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.03), transparent);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.photo-tip-item:hover::before {
+    opacity: 1;
+}
+
+.tip-icon-wrapper {
+    width: 46px;
+    height: 46px;
+    border-radius: 14px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.tip-icon-wrapper i {
+    position: relative;
+    z-index: 2;
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.photo-tip-item:hover .tip-icon-wrapper {
+    transform: scale(1.1);
+}
+
+.photo-tip-item:hover .tip-icon-wrapper i {
+    animation: pulse-icon 1.5s infinite;
+}
+
+@keyframes pulse-icon {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.bg-info-light {
+    background-color: rgba(13, 202, 240, 0.15) !important;
+}
+
+.bg-success-light {
+    background-color: rgba(25, 135, 84, 0.15) !important;
+}
+
+.bg-warning-light {
+    background-color: rgba(255, 193, 7, 0.15) !important;
+}
+
+.bg-danger-light {
+    background-color: rgba(220, 53, 69, 0.15) !important;
+}
+
+.photo-tip-item h6 {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--gray-800);
+    transition: color 0.3s ease;
+}
+
+.photo-tip-item:hover h6 {
+    color: var(--primary-color);
+}
+
+.photo-tip-item p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--gray-600);
+}
+
+/* 添加简单的动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.register-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.benefit-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.benefit-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.benefit-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.benefit-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.register-icon i {
+    animation: pulse 2s infinite;
+}
+
+/* 分析状态卡片样式优化 */
+#analysis-info-card {
+    transition: all 0.3s ease;
+    animation: fadeIn 0.6s ease-out;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+.analysis-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 0.5rem;
+}
+
+.analysis-step {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    background-color: #f8faff;
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    border-left: 3px solid #e5e9f2;
+}
+
+.analysis-step.active {
+    background-color: rgba(68, 112, 255, 0.08);
+    border-left: 3px solid #4470ff;
+    box-shadow: 0 5px 15px rgba(68, 112, 255, 0.1);
+}
+
+.analysis-step.completed {
+    border-left: 3px solid #38b48b;
+}
+
+.step-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    background-color: #e5e9f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: #6c757d;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.analysis-step.active .step-icon {
+    background-color: #4470ff;
+    color: white;
+    box-shadow: 0 5px 15px rgba(68, 112, 255, 0.2);
+}
+
+.analysis-step.completed .step-icon {
+    background-color: #38b48b;
+    color: white;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-title {
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
+}
+
+.step-desc {
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-bottom: 0;
+    line-height: 1.4;
+}
+
+/* 信息框样式 */
+.info-box {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    background-color: rgba(255, 248, 225, 0.5);
+    border-radius: 1rem;
+    border-left: 3px solid #f59e0b;
+}
+
+.info-icon {
+    font-size: 1.5rem;
+    color: #f59e0b;
+    margin-right: 1rem;
+}
+
+.info-content p {
+    color: #664d03;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+/* 分析期间提示列表 */
+.tips-during-analysis h6 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.tips-list {
+    padding-left: 1.5rem;
+    margin-bottom: 0;
+}
+
+.tips-list li {
+    color: #495057;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.tips-list li:last-child {
+    margin-bottom: 0;
+}
+
+/* 迷你进度指示器样式 */
+#mini-progress-indicator {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    padding: 0.5rem 0.8rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(68, 112, 255, 0.1);
+    margin-top: 0.5rem !important;
+    margin-bottom: 1rem !important;
+}
+
+#mini-progress-indicator .progress {
+    border-radius: 50px;
+    height: 6px;
+    background-color: rgba(68, 112, 255, 0.1);
+}
+
+#mini-progress-indicator .progress-bar {
+    border-radius: 50px;
+    background: linear-gradient(90deg, #4470ff, #6698ff);
+}
+
+.mini-progress-text {
+    font-weight: 600;
+    min-width: 30px;
+    text-align: right;
+}
+
+/* 分析完成后的结果预览区 */
+#analysis-info-card .result-preview {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding-top: 1rem;
+    margin-top: 1rem;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.result-preview-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(68, 112, 255, 0.1), rgba(68, 112, 255, 0.2));
+    box-shadow: 0 5px 15px rgba(68, 112, 255, 0.15);
+}
+
+.result-loading {
+    display: flex;
+    justify-content: center;
+}
+
+/* 动画效果 */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* 加深完成步骤的对号颜色和增强视觉效果 */
+.analysis-step.completed .step-icon i {
+    font-weight: bold;
+    text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+/* 确保分析信息卡片内部的元素紧凑排列 */
+#analysis-info-card .card-body {
+    padding: 1rem;
+}
+
+/* 添加"分析中"状态通知图标 */
+.analyzing-notification {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(68, 112, 255, 0.9);
+    color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    display: none;
+    animation: pulse 1.5s infinite;
+}
+
+.analyzing-active .analyzing-notification {
+    display: inline-flex;
+    align-items: center;
+}
+
+.analyzing-notification i {
+    margin-right: 5px;
+}
+
+/* 确保完整分析过程的显示工具提示 */
+.step-complete-tooltip {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 20px;
+    background: rgba(68, 112, 255, 0.9);
+    color: white;
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    box-shadow: 0 5px 20px rgba(68, 112, 255, 0.3);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.step-complete-tooltip.show {
+    opacity: 1;
+    animation: tooltipPulse 2s infinite;
+}
+
+@keyframes tooltipPulse {
+    0% {
+        transform: translateX(-50%) scale(1);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(1.05);
+    }
+
+    100% {
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/* 避免分析状态卡片与上传卡片过于分离 */
+.analyzing-active .col-lg-8>.card.floating-card {
+    margin-bottom: 0.75rem !important;
+}
+
+/* 自定义动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 添加"保持在页面"动画效果，确保最后一步显示完整 */
+.analysis-step:last-child.active .step-icon {
+    animation: pulse 1.5s infinite;
+}
+
+/* 确保分析状态卡片始终优雅地显示 */
+@media (max-width: 991.98px) {
+    #analysis-info-card {
+        margin-bottom: 1.5rem;
+    }
+
+    #analysis-info-card .card-body {
+        padding: 1rem;
+    }
+}
+
+/* 媒体查询优化 */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+    .preview-body img {
+        max-height: 200px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1599.98px) {
+    .preview-body img {
+        max-height: 220px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .preview-body img {
+        max-height: 260px;
+    }
+}
+
+/* 分析状态卡片样式 - 参考注册卡片 */
+.analysis-card {
+    background: #ffffff;
+    border-radius: 1.5rem !important;
+    border: none !important;
+    box-shadow: 0 15px 40px rgba(68, 112, 255, 0.1) !important;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.analysis-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #6366f1, #f97316);
+    z-index: 1;
+}
+
+.analysis-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top right, rgba(99, 102, 241, 0.03), transparent 70%),
+        radial-gradient(ellipse at bottom left, rgba(249, 115, 22, 0.03), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.analysis-card .card-body {
+    position: relative;
+    z-index: 2;
+    padding: 1.5rem;
+}
+
+/* 标题与图标美化 */
+.analysis-icon {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 16px rgba(99, 102, 241, 0.25);
+    position: relative;
+    z-index: 1;
+}
+
+.analysis-icon::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.4;
+    filter: blur(6px);
+    z-index: -1;
+}
+
+.analysis-icon i {
+    animation: pulse 2s infinite;
+}
+
+/* 进度条美化 */
+#mini-progress-indicator {
+    background-color: #f8fafc;
+    border-radius: 12px;
+    padding: 0.6rem;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.08);
+    margin: 1rem 0 1.2rem;
+    border: 1px solid rgba(226, 232, 240, 0.6);
+    position: relative;
+    overflow: hidden;
+}
+
+#mini-progress-indicator .progress {
+    height: 12px;
+    border-radius: 10px;
+    background-color: rgba(226, 232, 240, 0.6);
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+#mini-progress-indicator .progress-bar {
+    background: linear-gradient(90deg, #6366f1, #f97316);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+#mini-progress-indicator .progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    animation: shimmer 2s infinite;
+    transform: translateX(-100%);
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* 进度百分比美化 */
+.progress-percentage {
+    background: linear-gradient(90deg, #6366f1, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0.25rem 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.progress-percentage::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(99, 102, 241, 0.08);
+    border-radius: 20px;
+    z-index: -1;
+}
+
+/* 步骤显示美化 */
+.status-steps {
+    position: relative;
+    margin: 1.5rem 0 1rem;
+}
+
+.status-steps::before {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    height: 2px;
+    background: #e2e8f0;
+    z-index: 0;
+    opacity: 0.7;
+}
+
+.status-step {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.step-dot {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative;
+    z-index: 2;
+    border: 1px solid rgba(203, 213, 225, 0.4);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+}
+
+.status-step.active .step-dot {
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    box-shadow: 0 5px 15px rgba(99, 102, 241, 0.25);
+    border: none;
+    transform: scale(1.08);
+}
+
+.status-step.completed .step-dot {
+    background: linear-gradient(135deg, #34d399, #059669);
+    color: white;
+    box-shadow: 0 5px 15px rgba(5, 150, 105, 0.25);
+    border: none;
+}
+
+.status-step.active .step-dot::after,
+.status-step.completed .step-dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: inherit;
+    opacity: 0.35;
+    filter: blur(6px);
+    z-index: -1;
+}
+
+.step-connector {
+    position: relative;
+    flex: 1;
+    height: 2px;
+    background: #e2e8f0;
+    margin-top: 16px;
+    z-index: 1;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.step-connector.active {
+    background: linear-gradient(90deg, #34d399, #6366f1);
+    height: 3px;
+    box-shadow: 0 2px 4px rgba(99, 102, 241, 0.15);
+}
+
+.step-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #64748b;
+    margin-top: 0.6rem;
+    transition: all 0.3s ease;
+}
+
+.status-step.active .step-label {
+    color: #4f46e5;
+    font-weight: 600;
+}
+
+.status-step.completed .step-label {
+    color: #059669;
+    font-weight: 600;
+}
+
+/* 说明文本美化 */
+.text-muted.small.text-center {
+    color: #64748b !important;
+    background: rgba(241, 245, 249, 0.6);
+    border-radius: 8px;
+    padding: 0.6rem;
+    margin-top: 0.8rem;
+    font-size: 0.85rem !important;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* 动画效果增强 */
+.status-step.active .step-dot i {
+    animation: spin 1.2s linear infinite;
+}
+
+.status-step.completed .step-dot i {
+    font-weight: bold;
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+    animation: check-pop 0.5s ease-out;
+}
+
+@keyframes check-pop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 576px) {
+    .step-dot {
+        width: 30px;
+        height: 30px;
+        font-size: 0.75rem;
+    }
+
+    .step-label {
+        font-size: 0.8rem;
+    }
+
+    .step-connector {
+        margin-top: 15px;
+    }
+
+    .status-steps::before {
+        top: 14px;
+    }
+}
+
+/* 上传成功动画 */
+@keyframes uploadSuccess {
+    0% {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.upload-status-icon i {
+    animation: uploadSuccess 0.5s ease-out;
+}
+
+/* 美化重新上传按钮 */
+#reupload-btn {
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem;
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.1);
+}
+
+#reupload-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+}

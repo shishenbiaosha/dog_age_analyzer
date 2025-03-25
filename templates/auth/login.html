@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block title %}登录 - 狗狗年龄识别系统{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- 全屏蓝色背景 -->
+<div class="auth-left-bg">
+    <div class="decoration-1"></div>
+    <div class="decoration-2"></div>
+</div>
+
+<div id="content-wrapper" class="container py-5">
+    <!-- 装饰元素 -->
+    <div class="auth-decoration auth-decoration-3">
+        <i class="fas fa-paw"></i>
+    </div>
+
+    <div class="row align-items-center">
+        <!-- 左侧说明 -->
+        <div class="col-lg-6 d-none d-lg-block mb-5 mb-lg-0">
+            <div class="auth-left-content text-center text-lg-start mb-4 animate__animated animate__fadeInLeft"
+                data-aos="fade-right">
+                <h2 class="display-5 fw-bold mb-3">欢迎回来！</h2>
+                <p class="lead mb-4">登录您的账户，继续探索狗狗年龄识别的奇妙世界</p>
+                <div class="login-benefits mt-5">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="benefit-icon-wrapper me-3">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">查看分析历史</h5>
+                            <p class="text-muted mb-0 small">随时访问您之前的狗狗年龄分析记录</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="benefit-icon-wrapper me-3">
+                            <i class="fas fa-paw"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">管理多只爱犬</h5>
+                            <p class="text-muted mb-0 small">一个账户可以管理多只狗狗的信息</p>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="benefit-icon-wrapper me-3">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">获取健康提醒</h5>
+                            <p class="text-muted mb-0 small">根据狗狗年龄获取定制化的健康建议</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 登录表单 -->
+        <div class="col-lg-6 col-md-9 col-sm-11 mx-auto animate__animated animate__fadeInRight" data-aos="fade-left">
+            <div class="card auth-card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="fas fa-sign-in-alt"></i>账户登录</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" class="needs-validation auth-form" novalidate>
+                        {{ form.hidden_tag() }}
+
+                        <div class="mb-4">
+                            {{ form.email.label(class="form-label") }}
+                            {{ form.email(class="form-control" + (" is-invalid" if form.email.errors else ""),
+                            placeholder="请输入您的邮箱地址") }}
+                            {% if form.email.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="mb-4">
+                            {{ form.password.label(class="form-label") }}
+                            <div class="input-group">
+                                {{ form.password(class="form-control" + (" is-invalid" if form.password.errors else ""),
+                                placeholder="请输入您的密码", id="password") }}
+                                <span class="input-group-text bg-transparent border-start-0">
+                                    <i class="far fa-eye-slash toggle-password" id="togglePassword"></i>
+                                </span>
+                            </div>
+                            {% if form.password.errors %}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                {{ error }}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            <div class="text-end mt-1">
+                                <a href="javascript:void(0)" class="text-decoration-none small text-muted"
+                                    id="forgotPassword">忘记密码？</a>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2 mb-4">
+                            {{ form.submit(class="btn btn-primary auth-btn") }}
+                        </div>
+
+                        <div class="text-center">
+                            <p class="mb-0">还没有账号？ <a href="{{ url_for('auth.register') }}"
+                                    class="text-decoration-none">立即注册</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% endblock %}

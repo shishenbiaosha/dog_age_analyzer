@@ -1,0 +1,1617 @@
+/* 结果页面样式 - 全新设计 */
+
+/* 页面标题区域 - 与analyze.css保持一致 */
+.page-header {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 70%);
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+    z-index: 0;
+}
+
+.page-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(249, 115, 22, 0.1) 0%, rgba(249, 115, 22, 0) 70%);
+    border-radius: 50%;
+    transform: translate(-30%, 30%);
+    z-index: 0;
+}
+
+/* 确保页面标题内容显示在前景 */
+.page-header>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* 标题文字大小调整 */
+.display-5 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* 副标题样式 */
+.lead {
+    font-size: 1.125rem;
+    font-weight: 400;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, #5271ff, var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 结果卡片容器 */
+.result-card {
+    background-color: white;
+    border-radius: 16px;
+    margin-bottom: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/* 使用全局悬浮动画 - 与analyze页面保持一致 */
+.floating-card {
+    animation: float 6s infinite ease-in-out;
+    transition: all 0.3s ease;
+}
+
+/* 悬停时应用更明显的效果 */
+.floating-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
+}
+
+.result-header {
+    background: linear-gradient(120deg, #a5a7f7, #faa76b);
+    color: white;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.result-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50 30 L60 40 L50 50 L40 40 Z" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+    opacity: 0.1;
+}
+
+.result-header h2 {
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* 结果年龄显示 */
+.result-age {
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0.5rem 0;
+    display: inline-block;
+    position: relative;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.result-age::after {
+    content: "";
+    font-size: 1.75rem;
+    font-weight: 500;
+    position: absolute;
+    right: -1.5rem;
+    bottom: 1rem;
+}
+
+.result-header p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-top: 0.5rem;
+    color: white;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.result-header p strong {
+    font-weight: 600;
+}
+
+/* 结果卡片主体区域新样式 */
+.result-body {
+    background-color: white;
+    border-radius: 0 0 16px 16px;
+    padding: 1.5rem;
+}
+
+/* 现代布局 - 始终保持水平布局 */
+.modern-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: nowrap;
+}
+
+/* 左侧列样式 - 图片部分 */
+.info-column {
+    flex: 0 0 auto;
+    width: 300px;
+    max-width: 30%;
+    min-width: 200px;
+}
+
+/* 右侧列样式 - 生命阶段卡片 */
+.stage-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    min-width: 0;
+}
+
+/* 狗狗照片区域样式 */
+.dog-avatar-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1/1;
+    margin: 0 auto;
+    max-width: 280px;
+}
+
+.avatar-decoration {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -10px;
+    left: -10px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    border-radius: 18px;
+    opacity: 0.18;
+    z-index: 0;
+    transform: rotate(-3deg);
+    transition: all 0.4s ease;
+}
+
+/* 添加第二层装饰，增强立体感 */
+.avatar-decoration:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 6px;
+    left: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 18px;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.dog-avatar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    z-index: 1;
+    transition: all 0.4s ease;
+    border: 5px solid white;
+}
+
+.dog-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.5s ease;
+}
+
+/* 品种徽章样式 */
+.breed-badge {
+    display: inline-block;
+    background-color: rgba(99, 102, 241, 0.1);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.1);
+    transition: all 0.3s ease;
+}
+
+.breed-badge:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+/* 分析时间样式 */
+.dog-analysis-time {
+    display: inline-flex;
+    align-items: center;
+    color: #4a5568;
+    font-size: 1.05rem;
+    padding: 0.5rem 0.8rem;
+    background-color: rgba(249, 250, 251, 0.5);
+    border-radius: 8px;
+    box-shadow: none;
+    margin-top: 1.8rem;
+    transition: all 0.3s ease;
+    border: none;
+    font-weight: 500;
+    width: 100%;
+    justify-content: center;
+}
+
+.dog-analysis-time:hover {
+    background-color: rgba(240, 244, 248, 0.8);
+    transform: none;
+    box-shadow: none;
+}
+
+.dog-analysis-time i {
+    font-size: 1.15rem;
+    color: var(--primary-color);
+    margin-right: 0.6rem;
+    opacity: 0.9;
+}
+
+/* 分析结果摘要区域 */
+.age-summary {
+    border-radius: 12px;
+    background-color: #f9fafb;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.analysis-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary-color), rgba(99, 102, 241, 0.8));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.2);
+}
+
+/* 生命阶段部分样式 - 马卡龙色系风格 */
+.life-stage-section {
+    background: linear-gradient(145deg, #f5f6ff, #fff);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(164, 166, 236, 0.2);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(164, 166, 236, 0.15);
+    transition: all 0.4s ease;
+}
+
+.life-stage-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(164, 166, 236, 0.3);
+}
+
+.stage-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.8rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed rgba(164, 166, 236, 0.3);
+    position: relative;
+    z-index: 1;
+}
+
+.stage-title span:first-child {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #333;
+    position: relative;
+    padding-left: 1.4rem;
+    letter-spacing: 0.5px;
+}
+
+.stage-title span:first-child::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #9a9cef, #c594a8);
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 0 3px rgba(164, 166, 236, 0.2);
+}
+
+.stage-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #9a9cef, #d9967a);
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 5px 15px rgba(164, 166, 236, 0.3);
+    animation: softPulse 2s infinite;
+}
+
+@keyframes softPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(164, 166, 236, 0.5);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(164, 166, 236, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(164, 166, 236, 0);
+    }
+}
+
+.stage-visualization {
+    position: relative;
+    padding: 1.5rem 0;
+    z-index: 1;
+}
+
+.stage-timeline {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 2rem 0 1rem;
+}
+
+/* 马卡龙色系时间轴 */
+.progress-track {
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, #e9eaff, #ffeef2);
+    z-index: 1;
+    transform: translateY(3px);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.progress-track::after {
+    content: '';
+    position: absolute;
+    height: 100%;
+    background: linear-gradient(90deg, #a5a7f7 0%, #d0a5f2 50%, #faa76b 100%);
+    border-radius: 8px;
+    animation: progressAnimation 1.5s ease forwards;
+    width: 0;
+    box-shadow: 0 0 5px rgba(165, 167, 247, 0.6);
+}
+
+.stage-point {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    padding: 0 8px;
+}
+
+.stage-point:hover .point-marker {
+    transform: scale(1.3);
+    box-shadow: 0 0 0 5px rgba(154, 156, 239, 0.25), 0 5px 10px rgba(154, 156, 239, 0.4);
+}
+
+.stage-point:hover .point-label {
+    transform: translateY(-3px);
+    font-weight: 600;
+}
+
+.stage-point:hover .point-age {
+    transform: translateY(2px);
+    opacity: 1;
+}
+
+/* 马卡龙色系标记点 */
+.point-marker {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #e5e6ff;
+    box-shadow: 0 0 0 4px rgba(229, 230, 255, 0.6);
+    margin-bottom: 1rem;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.point-label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 0.4rem;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.point-age {
+    font-size: 0.8rem;
+    color: #888;
+    background-color: #f9f9f9;
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    opacity: 0.9;
+}
+
+/* 马卡龙色系阶段颜色 */
+.stage-point[data-stage="幼年期"] .point-marker {
+    background-color: #a5a7f7;
+    /* 柔和的浅蓝紫色 */
+}
+
+.stage-point[data-stage="青春期"] .point-marker {
+    background-color: #b9a5f7;
+    /* 柔和的薰衣草紫色 */
+}
+
+.stage-point[data-stage="壮年期"] .point-marker {
+    background-color: #d0a5f2;
+    /* 柔和的粉紫色 */
+}
+
+.stage-point[data-stage="中年期"] .point-marker {
+    background-color: #f7bda5;
+    /* 柔和的粉橙色 */
+}
+
+.stage-point[data-stage="老年期"] .point-marker {
+    background-color: #faa76b;
+    /* 柔和的橙色 */
+}
+
+/* 设置进度条宽度，基于当前生命阶段 */
+.stage-visualization[data-stage="幼年期"] .progress-track::after {
+    width: 10%;
+    background: linear-gradient(90deg, #a5a7f7, #a5a7f7);
+}
+
+.stage-visualization[data-stage="青春期"] .progress-track::after {
+    width: 30%;
+    background: linear-gradient(90deg, #a5a7f7, #b9a5f7);
+}
+
+.stage-visualization[data-stage="壮年期"] .progress-track::after {
+    width: 50%;
+    background: linear-gradient(90deg, #a5a7f7, #b9a5f7, #d0a5f2);
+}
+
+.stage-visualization[data-stage="中年期"] .progress-track::after {
+    width: 75%;
+    background: linear-gradient(90deg, #a5a7f7, #b9a5f7, #d0a5f2, #f7bda5);
+}
+
+.stage-visualization[data-stage="老年期"] .progress-track::after {
+    width: 100%;
+    background: linear-gradient(90deg, #a5a7f7, #b9a5f7, #d0a5f2, #f7bda5, #faa76b);
+}
+
+/* 突出显示当前生命阶段 */
+.stage-point[data-stage="幼年期"] .point-marker,
+.stage-point[data-stage="青春期"] .point-marker,
+.stage-point[data-stage="壮年期"] .point-marker,
+.stage-point[data-stage="中年期"] .point-marker,
+.stage-point[data-stage="老年期"] .point-marker {
+    transform: scale(1.5);
+    box-shadow: 0 0 0 5px rgba(154, 156, 239, 0.25), 0 3px 10px rgba(154, 156, 239, 0.3);
+}
+
+.stage-point[data-stage="幼年期"] .point-age,
+.stage-point[data-stage="青春期"] .point-age,
+.stage-point[data-stage="壮年期"] .point-age,
+.stage-point[data-stage="中年期"] .point-age,
+.stage-point[data-stage="老年期"] .point-age {
+    opacity: 1;
+    font-weight: 600;
+}
+
+/* 为当前阶段标签添加特别样式 */
+.stage-point[data-stage="幼年期"] .point-label {
+    color: #8183d9;
+}
+
+.stage-point[data-stage="青春期"] .point-label {
+    color: #9683d9;
+}
+
+.stage-point[data-stage="壮年期"] .point-label {
+    color: #b283d4;
+}
+
+.stage-point[data-stage="中年期"] .point-label {
+    color: #d99c83;
+}
+
+.stage-point[data-stage="老年期"] .point-label {
+    color: #e08f59;
+}
+
+.stage-point:hover .point-label {
+    color: #7678d4;
+}
+
+@keyframes progressAnimation {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* 操作按钮部分 */
+.action-section {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: flex-start;
+    /* 左对齐 */
+    flex-wrap: wrap;
+    /* 允许按钮换行 */
+}
+
+/* 设置按钮在action-section下的宽度 */
+.action-section .btn {
+    flex: 0 1 auto;
+    /* 按钮宽度自适应内容 */
+    min-width: 130px;
+    /* 稍微增加最小宽度 */
+    margin-right: 1rem;
+    /* 按钮之间的间距 */
+    margin-bottom: 0.5rem;
+    /* 添加底部间距，避免换行挤压 */
+}
+
+/* 移除旧的按钮样式（因为现在使用了nav-action-btn） */
+@media (max-width: 767.98px) {
+    .modern-layout {
+        gap: 1rem;
+    }
+
+    .info-column {
+        max-width: 40%;
+    }
+
+    .dog-avatar {
+        border-width: 4px;
+    }
+
+    .life-stage-section {
+        padding: 1rem;
+    }
+
+    .stage-title {
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    .point-label {
+        font-size: 0.8rem;
+    }
+
+    .point-age {
+        font-size: 0.7rem;
+        padding: 0.15rem 0.4rem;
+    }
+}
+
+/* 超小屏幕调整 */
+@media (max-width: 575.98px) {
+    .modern-layout {
+        flex-wrap: wrap;
+    }
+
+    .info-column {
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .dog-avatar-container {
+        max-width: 180px;
+    }
+}
+
+/* 悬浮动画 */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* 分享卡片样式 - 美化版 */
+.share-card {
+    background: linear-gradient(135deg, #fff, #f9faff);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.5rem !important;
+    /* 确保与健康建议卡片底部边距一致 */
+}
+
+.share-card::before,
+.share-card::after {
+    display: none;
+    /* 移除装饰元素 */
+}
+
+.share-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+}
+
+.share-card .card-header {
+    background: linear-gradient(135deg, #f7f9ff, #eef1f9) !important;
+    border-bottom: none;
+    padding: 1rem 1.5rem !important;
+    position: relative;
+    z-index: 1;
+}
+
+.bg-gradient-light {
+    background: linear-gradient(135deg, #f7f9ff, #eef1f9) !important;
+}
+
+.share-card .card-header h5 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+    color: #3a4356;
+}
+
+.share-card .card-header h5 i {
+    color: #5156D0;
+    opacity: 0.9;
+}
+
+.share-card .card-body {
+    padding: 1.25rem 1.5rem !important;
+    position: relative;
+    z-index: 1;
+}
+
+.share-card .card-body p {
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem !important;
+    color: #6b7280;
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+}
+
+/* 分享预览样式 */
+.share-preview {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 1rem;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.share-preview-image img {
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.share-preview-text h6 {
+    font-weight: 600;
+    color: #3a4356;
+}
+
+.share-preview-text p {
+    font-size: 0.85rem !important;
+    margin-bottom: 0 !important;
+}
+
+.share-tag-line {
+    font-size: 0.9rem;
+    color: #6b7280;
+    background-color: rgba(81, 86, 208, 0.05) !important;
+    border-left: 3px solid rgba(81, 86, 208, 0.5);
+}
+
+/* 分享按钮容器 */
+.share-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+/* 移除装饰线条 */
+.share-buttons::after {
+    display: none;
+}
+
+.share-button {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #f5f7fa;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+    position: relative;
+    overflow: hidden;
+}
+
+.share-button::after {
+    display: none;
+    /* 移除波纹效果 */
+}
+
+.share-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
+}
+
+.share-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    transition: all 0.1s ease;
+}
+
+/* 不同社交平台的颜色 - 明亮版 */
+.share-wechat {
+    /* 微信绿色柔和版 */
+    background: rgba(7, 193, 96, 0.1);
+    color: rgba(7, 193, 96, 0.9);
+    border-color: rgba(7, 193, 96, 0.2);
+}
+
+.share-wechat:hover {
+    background: rgb(7, 193, 96);
+    border-color: rgb(7, 193, 96);
+}
+
+.share-qq {
+    /* QQ蓝色柔和版 */
+    background: rgba(18, 183, 245, 0.1);
+    color: rgba(18, 183, 245, 0.9);
+    border-color: rgba(18, 183, 245, 0.2);
+}
+
+.share-qq:hover {
+    background: rgb(18, 183, 245);
+    border-color: rgb(18, 183, 245);
+}
+
+.share-weibo {
+    /* 微博红色柔和版 */
+    background: rgba(230, 22, 45, 0.1);
+    color: rgba(230, 22, 45, 0.9);
+    border-color: rgba(230, 22, 45, 0.2);
+}
+
+.share-weibo:hover {
+    background: rgb(230, 22, 45);
+    border-color: rgb(230, 22, 45);
+}
+
+.share-copy {
+    /* 复制链接蓝色 */
+    background: rgba(81, 86, 208, 0.1);
+    color: rgba(81, 86, 208, 0.9);
+    border-color: rgba(81, 86, 208, 0.2);
+}
+
+.share-copy:hover {
+    background: rgb(81, 86, 208);
+    border-color: rgb(81, 86, 208);
+}
+
+.share-download {
+    /* 下载图片紫色 */
+    background: rgba(124, 58, 237, 0.1);
+    color: rgba(124, 58, 237, 0.9);
+    border-color: rgba(124, 58, 237, 0.2);
+}
+
+.share-download:hover {
+    background: rgb(124, 58, 237);
+    border-color: rgb(124, 58, 237);
+}
+
+/* 点击反馈效果 */
+.share-button.click-feedback {
+    transform: scale(0.9);
+    opacity: 0.8;
+}
+
+/* 成功消息样式 */
+#share-success-message {
+    background-color: rgba(16, 185, 129, 0.1);
+    border: none;
+    border-left: 3px solid rgba(16, 185, 129, 0.6);
+    color: rgba(16, 185, 129, 0.9);
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    animation: fadeInUp 0.3s ease;
+}
+
+#share-success-message i {
+    color: rgba(16, 185, 129, 1);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 响应式调整 */
+@media (max-width: 767.98px) {
+    .share-buttons {
+        justify-content: flex-start;
+        gap: 0.75rem;
+    }
+
+    .share-button {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+    }
+
+    .share-preview {
+        padding: 0.75rem;
+    }
+}
+
+/* 下拉菜单样式 */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 0.5rem;
+}
+
+.dropdown-item {
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(99, 102, 241, 0.08);
+    color: var(--primary-color);
+}
+
+/* Toast消息样式 */
+#toast-message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(51, 51, 51, 0.9);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 按钮涟漪效果动画 */
+@keyframes ripple-effect {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* 年龄对照表样式 */
+.age-comparison-card {
+    background: #ffffff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06) !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    transition: all 0.3s ease;
+}
+
+.age-comparison-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important;
+}
+
+.age-comparison-card .card-header {
+    background: #f9fafb !important;
+    border-bottom: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.age-comparison-card .card-header::before {
+    display: none;
+    /* 移除装饰元素 */
+}
+
+.age-comparison-card .card-header h5 {
+    position: relative;
+    z-index: 1;
+    color: #4b5563;
+}
+
+.age-comparison-card .card-header i {
+    color: #6b7280;
+}
+
+/* 美化表格样式 */
+.age-table {
+    border-radius: 12px;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.age-table thead th {
+    background: #f3f4f6;
+    color: #4b5563;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    padding: 0.8rem 0.6rem;
+    vertical-align: middle;
+    border: none;
+    text-align: center;
+}
+
+.age-table th.stage-indicator {
+    width: 15px;
+    padding: 0;
+}
+
+.age-table th:first-child {
+    border-top-left-radius: 12px;
+}
+
+.age-table th:last-child {
+    border-top-right-radius: 12px;
+}
+
+.age-table td {
+    padding: 0.7rem 0.6rem;
+    vertical-align: middle;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    font-weight: 500;
+    color: #4b5563;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.age-table td.stage-indicator {
+    width: 15px;
+    padding: 0;
+}
+
+.age-table tr:hover td {
+    background-color: rgba(99, 102, 241, 0.03);
+}
+
+/* 生命阶段行颜色 */
+.age-table tr.stage-puppy td.stage-indicator {
+    background-color: rgba(165, 167, 247, 0.5);
+}
+
+.age-table tr.stage-juvenile td.stage-indicator {
+    background-color: rgba(185, 165, 247, 0.5);
+}
+
+.age-table tr.stage-adult td.stage-indicator {
+    background-color: rgba(208, 165, 242, 0.5);
+}
+
+.age-table tr.stage-middle td.stage-indicator {
+    background-color: rgba(247, 189, 165, 0.5);
+}
+
+.age-table tr.stage-senior td.stage-indicator {
+    background-color: rgba(250, 167, 107, 0.5);
+}
+
+/* 隐藏重复的阶段名称 */
+.age-table tr:not(.stage-divider) td:first-child {
+    color: transparent;
+    font-size: 0;
+}
+
+/* 生命阶段分隔行 */
+.age-table tr.stage-divider {
+    background: #f7f8fa;
+    transition: all 0.3s ease;
+}
+
+.age-table tr.stage-divider.collapsed {
+    background: #f3f4f6;
+    opacity: 0.9;
+}
+
+.age-table tr.stage-divider.active {
+    background: #edf1f7;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.age-table tr.stage-divider td {
+    position: relative;
+    padding: 0.8rem 0.6rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #4b5563;
+    text-align: left;
+    background: transparent;
+    border-top: 1px solid rgba(99, 102, 241, 0.1);
+    border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+/* 阶段标题样式，确保对齐 */
+.stage-header {
+    display: flex;
+    align-items: center;
+    padding: 0.2rem 0.5rem;
+    width: 100%;
+}
+
+.stage-header i {
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.8rem;
+    color: #6b7280;
+    opacity: 0.85;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.stage-divider.active .stage-header i {
+    color: #4b5563;
+    opacity: 1;
+    text-shadow: none;
+}
+
+.stage-header span {
+    font-weight: 700;
+    color: #4b5563;
+    margin-right: 0.5rem;
+    width: 4em;
+    /* 固定宽度，确保对齐 */
+    text-align: left;
+    display: inline-block;
+}
+
+.stage-divider.active .stage-header span {
+    color: #3c4151;
+    font-weight: 800;
+}
+
+.stage-divider.collapsed .stage-header {
+    opacity: 0.9;
+}
+
+.age-table tr.stage-divider:first-of-type td {
+    border-top: none;
+}
+
+/* 年龄徽章 */
+.age-badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: #f3f4f6;
+    color: #4b5563;
+}
+
+/* 小屏幕适配 */
+@media (max-width: 767.98px) {
+    .age-table {
+        font-size: 0.9rem;
+    }
+
+    .age-table th,
+    .age-table td {
+        padding: 0.6rem 0.5rem;
+    }
+
+    .age-table td:first-child {
+        padding-left: 0.8rem;
+    }
+
+    .age-table th:first-child {
+        padding-left: 0.8rem;
+    }
+
+    .age-table tr.stage-divider td {
+        padding: 0.7rem 0.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 更小屏幕的适配 */
+@media (max-width: 575.98px) {
+    .age-table {
+        font-size: 0.8rem;
+    }
+
+    .age-table thead th {
+        font-size: 0.75rem;
+    }
+
+    .age-table tr.stage-divider td {
+        font-size: 0.85rem;
+    }
+}
+
+/* 增强高亮效果 */
+.highlight-current-stage {
+    animation: highlightCurrentStage 3s infinite alternate;
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes highlightCurrentStage {
+    0% {
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    100% {
+        background-color: rgba(0, 0, 0, 0.06);
+    }
+}
+
+/* 健康建议卡片样式 */
+.health-tips-card {
+    background: #ffffff;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    /* 确保没有边框，但保留圆角 */
+    border: none !important;
+    overflow: hidden !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04) !important;
+}
+
+.health-tips-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06) !important;
+}
+
+.health-header {
+    background: linear-gradient(135deg, #5556d1, #9a9cef);
+    color: white;
+    padding: 0.75rem 1.25rem;
+    /* 减小标题内边距 */
+    border-bottom: none;
+}
+
+.health-header i {
+    font-size: 1.1rem;
+    /* 减小图标 */
+    margin-right: 0.5rem;
+}
+
+.health-header h5 {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 0.95rem;
+    /* 减小标题字体 */
+}
+
+.health-tips-wrapper {
+    display: flex;
+    flex-direction: column;
+    /* 确保没有边框 */
+    border: none !important;
+}
+
+.health-disclaimer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* 左对齐 */
+    padding: 0.75rem 1rem;
+    /* 减小内边距 */
+    background-color: #f9fafc;
+    /* 保持与内容区一致 */
+    color: #4b5563;
+    font-size: 0.85rem;
+    /* 减小字体 */
+    line-height: 1.5;
+    border-top: none;
+    /* 移除顶部边框 */
+    margin-top: 0.5rem;
+    /* 添加上方间距 */
+}
+
+.health-disclaimer i {
+    color: #666bdc;
+    margin-right: 0.5rem;
+    /* 减小图标与文字的间距 */
+    font-size: 0.9rem;
+    /* 减小图标 */
+    flex-shrink: 0;
+}
+
+.health-tips-content {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #f9fafc;
+    /* 更柔和的背景色 */
+    /* 确保内容区没有边框 */
+    border: none !important;
+    padding: 0.75rem 0.5rem;
+    /* 减小内边距 */
+    gap: 0.5rem;
+    /* 减小间隙 */
+}
+
+.tip-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    /* 减小内边距 */
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    /* 减小圆角 */
+    margin: 0.15rem 0;
+    /* 减小外边距 */
+    flex: 1 1 100%;
+    min-width: 100%;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+    /* 减轻阴影 */
+    /* 确保没有左右边框 */
+    border: none;
+    /* 移除所有边框 */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tip-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+}
+
+.tip-icon {
+    width: 2rem;
+    /* 减小图标尺寸 */
+    height: 2rem;
+    min-width: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.75rem;
+    /* 减小图标与文字的间距 */
+    background: linear-gradient(135deg, rgba(64, 67, 159, 0.45), rgba(103, 106, 197, 0.25));
+    color: #4a5568;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+.tip-icon i {
+    font-size: 1rem;
+    /* 减小图标内的图形大小 */
+}
+
+.tip-text {
+    font-size: 0.9rem;
+    /* 减小文字大小 */
+    color: #4b5563;
+    line-height: 1.5;
+}
+
+/* 为不同索引的提示设置不同的颜色 */
+.tip-icon-1 {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.5), rgba(249, 115, 22, 0.3));
+    color: #f97316;
+}
+
+.tip-icon-2 {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.5), rgba(79, 70, 229, 0.3));
+    color: #4f46e5;
+}
+
+.tip-icon-3 {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.5), rgba(16, 185, 129, 0.3));
+    color: #10b981;
+}
+
+.tip-icon-4 {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.5), rgba(236, 72, 153, 0.3));
+    color: #ec4899;
+}
+
+.tip-icon-5 {
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.5), rgba(14, 165, 233, 0.3));
+    color: #0ea5e9;
+}
+
+.tip-item:not(:last-child) {
+    margin-bottom: 0.5rem;
+    /* 减小项目间距 */
+}
+
+@media (min-width: 768px) {
+    .tip-item {
+        flex: 1 1 calc(50% - 0.75rem);
+        /* 调整间隙 */
+        min-width: calc(50% - 0.75rem);
+        /* 确保在大屏幕上也没有边框 */
+        border: none;
+        padding: 1rem 1.25rem;
+        /* 在大屏幕上也减小空间 */
+        margin: 0.15rem;
+        /* 减小外边距 */
+    }
+
+    .health-tips-content {
+        padding: 0.75rem;
+        /* 减小内容区内边距 */
+    }
+}
+
+/* 二维码弹出层样式 */
+.qrcode-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.qrcode-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.qrcode-container {
+    background-color: white;
+    border-radius: 16px;
+    width: 320px;
+    max-width: 90%;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+}
+
+.qrcode-modal.active .qrcode-container {
+    transform: translateY(0);
+}
+
+.qrcode-header {
+    padding: 1rem;
+    background: linear-gradient(135deg, #f7f9ff, #eef1f9);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.qrcode-header h5 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #3a4356;
+}
+
+.qrcode-close {
+    background: none;
+    border: none;
+    color: #6b7280;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.qrcode-close:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #3a4356;
+}
+
+.qrcode-body {
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.qrcode-display {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.qrcode-display img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.qrcode-display .loading {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+/* 分享按钮样式 - 从HTML模板中移植 */
+.share-button-minimal {
+    font-size: 1.25rem;
+    color: #9da3af;
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.share-button-minimal:hover {
+    transform: translateY(-2px);
+    color: #6366f1;
+    text-decoration: none;
+}
+
+.share-button-minimal:active {
+    transform: translateY(0);
+}
+
+.share-button-minimal[data-share="wechat"]:hover {
+    color: #07c160;
+}
+
+.share-button-minimal[data-share="qq"]:hover {
+    color: #12b7f5;
+}
+
+.share-button-minimal[data-share="weibo"]:hover {
+    color: #e6162d;
+}
+
+.share-button-minimal[data-share="copy"]:hover {
+    color: #5156d0;
+}
+
+/* 历史记录按钮特殊样式 */
+.history-btn {
+    background: linear-gradient(135deg, #14b8a6, #0ea5e9);
+    color: white !important;
+    border: none;
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.history-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0ea5e9, #14b8a6);
+    transition: all 0.4s ease;
+    z-index: -1;
+}
+
+.history-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(14, 165, 233, 0.3);
+}
+
+.history-btn:hover::before {
+    left: 0;
+}
+
+.history-btn i {
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.history-btn:hover i {
+    transform: rotate(360deg);
+}

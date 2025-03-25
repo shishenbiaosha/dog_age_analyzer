@@ -1,0 +1,502 @@
+{% extends 'base.html' %}
+
+{% block title %}狗狗年龄识别系统 - 首页{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- 英雄区域 -->
+<section class="hero position-relative overflow-hidden">
+    <!-- 背景装饰元素 -->
+    <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    <div class="container-fluid">
+        <div class="row align-items-center py-5">
+            <div class="col-lg-6" data-aos="fade-up">
+                <div class="hero-content ps-lg-4 ps-md-3 ps-2">
+                    <h1 class="hero-title mb-4">了解您爱犬的<span class="text-gradient">真实年龄</span></h1>
+                    <p class="hero-text mb-4">只需上传一张您爱犬的照片，我们先进的AI技术将帮助您估算狗狗的实际年龄，并提供相应的健康建议。</p>
+                    <div class="d-flex flex-wrap gap-3 mb-5">
+                        <a href="{{ url_for('dog.analyze') }}" class="btn btn-light btn-lg btn-glow">
+                            <i class="fas fa-camera me-2"></i>开始测试
+                        </a>
+                    </div>
+                    <div class="d-flex align-items-center user-stats">
+                        <div class="user-avatars">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="用户头像" class="user-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="用户头像" class="user-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="用户头像" class="user-avatar">
+                        </div>
+                        <div class="ms-3">
+                            <div class="text-white-75">已有<span class="text-white fw-bold counter">5,000+</span>宠物主人使用
+                            </div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="text-white-75 ms-2">4.9/5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block" data-aos="fade-left" data-aos-delay="200">
+                <div class="hero-image-container">
+                    <img src="{{ url_for('static', filename='images/hero-dog.png') }}" alt="狗狗照片"
+                        class="img-fluid hero-image">
+                    <div class="floating-badge badge-1">
+                        <i class="fas fa-check-circle text-success me-2"></i>
+                        <span class="badge-text">AI精准识别</span>
+                    </div>
+                    <div class="floating-badge badge-2">
+                        <i class="fas fa-shield-alt text-primary me-2"></i>
+                        <span class="badge-text">隐私保护</span>
+                    </div>
+                    <div class="floating-badge badge-3">
+                        <i class="fas fa-bolt text-warning me-2"></i>
+                        <span class="badge-text">快速分析</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 移除波浪底部装饰 -->
+</section>
+
+<!-- 信任标志 -->
+<section class="trust-badge-section py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="row g-3">
+                    <div class="col-5-items">
+                        <div class="trust-badge">
+                            <div class="trust-badge-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h5 class="trust-badge-title">安全保障</h5>
+                            <p class="trust-badge-text">保护您的数据安全</p>
+                        </div>
+                    </div>
+                    <div class="col-5-items">
+                        <div class="trust-badge">
+                            <div class="trust-badge-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <h5 class="trust-badge-title">专业认证</h5>
+                            <p class="trust-badge-text">权威机构认可技术</p>
+                        </div>
+                    </div>
+                    <div class="col-5-items">
+                        <div class="trust-badge">
+                            <div class="trust-badge-icon">
+                                <i class="fas fa-thumbs-up"></i>
+                            </div>
+                            <h5 class="trust-badge-title">用户好评</h5>
+                            <p class="trust-badge-text">98%用户满意度</p>
+                        </div>
+                    </div>
+                    <div class="col-5-items">
+                        <div class="trust-badge">
+                            <div class="trust-badge-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h5 class="trust-badge-title">24小时服务</h5>
+                            <p class="trust-badge-text">全天候技术支持</p>
+                        </div>
+                    </div>
+                    <div class="col-5-items">
+                        <div class="trust-badge">
+                            <div class="trust-badge-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h5 class="trust-badge-title">爱心保障</h5>
+                            <p class="trust-badge-text">关爱每一位宠物</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 功能特点 -->
+<section class="py-5">
+    <div class="container-fluid">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2 mb-2">我们的功能</span>
+            <h2 class="fw-bold display-5">为您的爱犬提供全方位服务</h2>
+            <p class="text-muted mx-auto" style="max-width: 600px;">通过先进的AI技术，我们为您的爱犬提供精准的年龄分析和个性化的健康建议</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dog"></i>
+                    </div>
+                    <h3>精准年龄分析</h3>
+                    <p class="text-muted">通过先进的图像识别技术，分析狗狗的外观特征，精准估算实际年龄。</p>
+                    <div class="feature-decoration">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-card">
+                    <div class="feature-icon" style="background-color: var(--secondary-color);">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3>健康建议</h3>
+                    <p class="text-muted">根据狗狗的年龄阶段，提供针对性的健康护理和饮食建议。</p>
+                    <div class="feature-decoration">
+                        <i class="fas fa-bone"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-card">
+                    <div class="feature-icon" style="background-color: var(--accent-color);">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>历史记录</h3>
+                    <p class="text-muted">保存您的狗狗历次分析结果，方便追踪成长变化。</p>
+                    <div class="feature-decoration">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 装饰元素 -->
+    <div class="position-absolute d-none d-lg-block" style="top: 15%; right: 5%; z-index: -1;">
+        <i class="fas fa-bone fa-3x text-primary opacity-10"></i>
+    </div>
+    <div class="position-absolute d-none d-lg-block" style="bottom: 10%; left: 5%; z-index: -1;">
+        <i class="fas fa-paw fa-4x text-primary opacity-10"></i>
+    </div>
+</section>
+
+<!-- 工作原理 -->
+<section class="py-5 bg-light position-relative">
+    <div class="container-fluid">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2 mb-2">工作原理</span>
+            <h2 class="fw-bold display-5">简单几步，了解爱犬真实年龄</h2>
+            <p class="text-muted mx-auto" style="max-width: 600px;">我们的AI系统通过分析狗狗的照片，快速准确地估算出它的实际年龄</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="process-step h-100">
+                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+                        <div class="p-4 text-center d-flex flex-column h-100">
+                            <div style="height: 120px; display: flex; align-items: center; justify-content: center;">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2983/2983067.png" alt="上传照片"
+                                    class="img-fluid" style="max-height: 90px;">
+                            </div>
+                            <div class="mt-4 flex-grow-1 d-flex flex-column justify-content-center">
+                                <h4 class="fw-bold mb-3">上传照片</h4>
+                                <p class="text-muted mb-0">上传一张清晰的狗狗正面照片</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                <div class="process-step h-100">
+                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+                        <div class="p-4 text-center d-flex flex-column h-100">
+                            <div style="height: 120px; display: flex; align-items: center; justify-content: center;">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="AI分析"
+                                    class="img-fluid" style="max-height: 90px;">
+                            </div>
+                            <div class="mt-4 flex-grow-1 d-flex flex-column justify-content-center">
+                                <h4 class="fw-bold mb-3">AI分析</h4>
+                                <p class="text-muted mb-0">我们的AI系统分析狗狗的特征</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                <div class="process-step h-100">
+                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+                        <div class="p-4 text-center d-flex flex-column h-100">
+                            <div style="height: 120px; display: flex; align-items: center; justify-content: center;">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2972/2972531.png" alt="年龄估算"
+                                    class="img-fluid" style="max-height: 90px;">
+                            </div>
+                            <div class="mt-4 flex-grow-1 d-flex flex-column justify-content-center">
+                                <h4 class="fw-bold mb-3">年龄估算</h4>
+                                <p class="text-muted mb-0">获得精准的年龄估算结果</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+                <div class="process-step h-100">
+                    <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+                        <div class="p-4 text-center d-flex flex-column h-100">
+                            <div style="height: 120px; display: flex; align-items: center; justify-content: center;">
+                                <img src="https://cdn-icons-png.flaticon.com/512/2966/2966327.png" alt="健康建议"
+                                    class="img-fluid" style="max-height: 90px;">
+                            </div>
+                            <div class="mt-4 flex-grow-1 d-flex flex-column justify-content-center">
+                                <h4 class="fw-bold mb-3">健康建议</h4>
+                                <p class="text-muted mb-0">获取针对性的健康护理建议</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5" data-aos="fade-up" data-aos-delay="500">
+            <a href="{{ url_for('dog.analyze') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-camera me-2"></i>立即开始
+            </a>
+        </div>
+
+    </div>
+    <!-- 装饰元素 -->
+    <div class="position-absolute d-none d-lg-block" style="top: 10%; left: 0; z-index: 0;">
+        <img src="https://cdn-icons-png.flaticon.com/512/1076/1076877.png" alt="装饰" width="80" class="opacity-10">
+    </div>
+    <div class="position-absolute d-none d-lg-block" style="bottom: 10%; right: 5%; z-index: 0;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2171/2171991.png" alt="装饰" width="100" class="opacity-10">
+    </div>
+</section>
+
+<!-- 用户评价 -->
+<section class="py-5 testimonials-section position-relative">
+    <div class="container-fluid">
+        <div class="text-center mb-5">
+            <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2 mb-2">用户评价</span>
+            <h2 class="fw-bold display-5">看看其他宠物主人怎么说</h2>
+            <p class="text-muted mx-auto" style="max-width: 600px;">我们已经帮助数千位宠物主人了解他们爱犬的真实年龄，听听他们的反馈</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testimonial-card h-100 border-0 shadow-sm rounded-4 p-4 position-relative">
+                    <div class="quote-icon position-absolute text-primary opacity-15">
+                        <i class="fas fa-quote-left fa-3x"></i>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="用户头像"
+                            class="testimonial-avatar rounded-circle me-3 border border-2 border-primary-light">
+                        <div>
+                            <h5 class="testimonial-name mb-0 fw-bold">李小姐</h5>
+                            <div class="testimonial-stars text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text mb-0 position-relative">
+                        "这个工具太神奇了！我一直不确定我家金毛的确切年龄，通过这个系统分析后，得到了很准确的结果，而且提供的健康建议非常实用。"</p>
+                    <div class="pet-icon position-absolute text-primary opacity-10">
+                        <i class="fas fa-paw fa-3x"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card h-100 border-0 shadow-sm rounded-4 p-4 position-relative">
+                    <div class="quote-icon position-absolute text-primary opacity-15">
+                        <i class="fas fa-quote-left fa-3x"></i>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="用户头像"
+                            class="testimonial-avatar rounded-circle me-3 border border-2 border-primary-light">
+                        <div>
+                            <h5 class="testimonial-name mb-0 fw-bold">张先生</h5>
+                            <div class="testimonial-stars text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text mb-0 position-relative">
+                        "作为一名收养流浪狗的志愿者，这个工具帮助我们更好地了解狗狗的年龄，为它们提供更合适的照顾。界面简洁，使用非常方便！"</p>
+                    <div class="pet-icon position-absolute text-primary opacity-10">
+                        <i class="fas fa-bone fa-3x"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testimonial-card h-100 border-0 shadow-sm rounded-4 p-4 position-relative">
+                    <div class="quote-icon position-absolute text-primary opacity-15">
+                        <i class="fas fa-quote-left fa-3x"></i>
+                    </div>
+                    <div class="d-flex align-items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="用户头像"
+                            class="testimonial-avatar rounded-circle me-3 border border-2 border-primary-light">
+                        <div>
+                            <h5 class="testimonial-name mb-0 fw-bold">王女士</h5>
+                            <div class="testimonial-stars text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="testimonial-text mb-0 position-relative">
+                        "我家的柯基是从朋友那里领养的，不知道确切年龄。通过这个系统，我终于知道了它大概几岁，可以更好地安排它的饮食和运动计划了。"</p>
+                    <div class="pet-icon position-absolute text-primary opacity-10">
+                        <i class="fas fa-heart fa-3x"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 行动号召 -->
+<section class="py-4 position-relative overflow-hidden cta-section">
+    <div class="cta-bg-shapes">
+        <div class="cta-shape cta-shape-1"></div>
+        <div class="cta-shape cta-shape-2"></div>
+        <div class="cta-shape cta-shape-3"></div>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <div class="card border-0 bg-gradient-primary text-white text-center p-4 shadow-lg rounded-4">
+                    <div class="card-body py-4">
+                        <span class="badge bg-white text-primary rounded-pill px-3 py-2 mb-2">立即行动</span>
+                        <h2 class="fw-bold mb-3 h3">立即了解您爱犬的真实年龄</h2>
+                        <p class="mb-3">只需上传一张照片，获取专业分析和健康建议</p>
+                        <a href="{{ url_for('dog.analyze') }}" class="btn btn-light btn-md btn-glow">
+                            <i class="fas fa-camera me-2"></i>开始分析
+                        </a>
+                        <div class="cta-decoration">
+                            <i class="fas fa-paw fa-4x text-white opacity-10 position-absolute"
+                                style="top: 10%; right: 5%;"></i>
+                            <i class="fas fa-bone fa-3x text-white opacity-10 position-absolute"
+                                style="bottom: 10%; left: 5%;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 装饰元素 -->
+    <div class="position-absolute d-none d-lg-block" style="top: 20%; left: 5%; z-index: -1;">
+        <i class="fas fa-bone fa-3x text-primary opacity-10 rotate-animation"></i>
+    </div>
+    <div class="position-absolute d-none d-lg-block" style="bottom: 10%; right: 10%; z-index: -1;">
+        <i class="fas fa-paw fa-4x text-primary opacity-10 pulse-animation"></i>
+    </div>
+</section>
+
+<!-- 常见问题 -->
+<section class="py-4 bg-light position-relative faq-section">
+    <div class="container">
+        <div class="text-center mb-4">
+            <span class="badge bg-primary-light text-primary rounded-pill px-3 py-2 mb-2">常见问题</span>
+            <h2 class="fw-bold h3 mb-2">您可能想知道的问题</h2>
+            <p class="text-muted mx-auto" style="max-width: 500px;">我们收集了用户最常问的问题，帮助您更好地了解我们的服务</p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <!-- 左侧问题 -->
+            <div class="col-md-6">
+                <div class="faq-card h-100 border-0 shadow-sm rounded-3 p-4 position-relative">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="faq-icon-wrapper me-3">
+                            <i class="fas fa-question-circle text-primary"></i>
+                        </div>
+                        <h5 class="faq-title mb-0 fw-bold">这个系统的准确率有多高？</h5>
+                    </div>
+                    <p class="faq-answer mb-0 ms-0">
+                        我们的系统基于大量的狗狗照片和年龄数据训练，准确率高。当然，不同犬种和个体差异可能会影响结果，我们会持续优化算法提高准确性。
+                    </p>
+                    <div class="faq-decoration position-absolute">
+                        <i class="fas fa-chart-line text-primary opacity-5"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- 右侧问题 -->
+            <div class="col-md-6">
+                <div class="faq-card h-100 border-0 shadow-sm rounded-3 p-4 position-relative">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="faq-icon-wrapper me-3">
+                            <i class="fas fa-camera text-primary"></i>
+                        </div>
+                        <h5 class="faq-title mb-0 fw-bold">需要什么样的照片才能获得准确结果？</h5>
+                    </div>
+                    <p class="faq-answer mb-0 ms-0">
+                        建议上传清晰的狗狗正面照片，最好是在自然光下拍摄的，能够清楚看到狗狗的面部特征。避免使用滤镜或过度编辑的照片，以免影响识别准确性。
+                    </p>
+                    <div class="faq-decoration position-absolute">
+                        <i class="fas fa-image text-primary opacity-5"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- 左侧问题 -->
+            <div class="col-md-6">
+                <div class="faq-card h-100 border-0 shadow-sm rounded-3 p-4 position-relative">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="faq-icon-wrapper me-3">
+                            <i class="fas fa-shield-alt text-primary"></i>
+                        </div>
+                        <h5 class="faq-title mb-0 fw-bold">我的照片和数据安全吗？</h5>
+                    </div>
+                    <p class="faq-answer mb-0 ms-0">
+                        我们非常重视用户隐私和数据安全。您上传的照片仅用于年龄分析，不会用于其他商业用途。所有数据传输采用加密技术，您可以放心使用我们的服务。
+                    </p>
+                    <div class="faq-decoration position-absolute">
+                        <i class="fas fa-lock text-primary opacity-5"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- 右侧问题 -->
+            <div class="col-md-6">
+                <div class="faq-card h-100 border-0 shadow-sm rounded-3 p-4 position-relative">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="faq-icon-wrapper me-3">
+                            <i class="fas fa-clock text-primary"></i>
+                        </div>
+                        <h5 class="faq-title mb-0 fw-bold">分析需要多长时间？</h5>
+                    </div>
+                    <p class="faq-answer mb-0 ms-0">
+                        我们的AI系统通常能在几分钟内完成分析。整个过程从上传照片到获得结果，一般不超过3分钟，让您快速了解爱犬的真实年龄。
+                    </p>
+                    <div class="faq-decoration position-absolute">
+                        <i class="fas fa-hourglass-half text-primary opacity-5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 背景装饰 -->
+    <div class="faq-bg-decoration position-absolute d-none d-lg-block">
+        <div class="faq-bg-circle faq-bg-circle-1"></div>
+        <div class="faq-bg-circle faq-bg-circle-2"></div>
+        <div class="faq-bg-circle faq-bg-circle-3"></div>
+    </div>
+    <!-- 装饰元素 -->
+    <div class="position-absolute d-none d-lg-block" style="top: 15%; right: 5%; z-index: 0;">
+        <i class="fas fa-paw fa-2x text-primary opacity-10 float-animation"></i>
+    </div>
+    <div class="position-absolute d-none d-lg-block" style="bottom: 10%; left: 5%; z-index: 0;">
+        <i class="fas fa-bone fa-2x text-primary opacity-10 float-animation-delay"></i>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}

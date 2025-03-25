@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}狗狗年龄识别系统{% endblock %}</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .alert {
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .alert-success {
+            border-left: 4px solid var(--bs-success);
+        }
+
+        .alert-danger {
+            border-left: 4px solid var(--bs-danger);
+        }
+
+        .alert-warning {
+            border-left: 4px solid var(--bs-warning);
+        }
+
+        .alert-info {
+            border-left: 4px solid var(--bs-info);
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">
+                <i class="fas fa-dog"></i>狗狗年龄识别
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}"
+                            href="{{ url_for('main.index') }}">
+                            <i class="fas fa-home me-1"></i>首页
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'dog.analyze' %}active{% endif %}"
+                            href="{{ url_for('dog.analyze') }}">
+                            <i class="fas fa-chart-bar me-1"></i>开始分析
+                        </a>
+                    </li>
+                    {% if session.get('user_id') %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.endpoint == 'dog.history' %}active{% endif %}"
+                            href="{{ url_for('dog.history') }}">
+                            <i class="fas fa-history me-1"></i>历史记录
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <div class="d-flex">
+                    {% if session.get('user_id') %}
+                    <a href="{{ url_for('auth.logout') }}" class="btn nav-action-btn btn-outline-secondary">
+                        <i class="fas fa-sign-out-alt"></i>退出
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('auth.login') }}" class="btn nav-action-btn btn-outline-primary me-2">
+                        <i class="fas fa-sign-in-alt me-1"></i>登录
+                    </a>
+                    <a href="{{ url_for('auth.register') }}" class="btn nav-action-btn btn-primary">
+                        <i class="fas fa-user-plus me-1"></i>注册
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 消息提示 -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-message-container position-fixed top-0 start-50 translate-middle-x"
+        style="z-index: 1050; width: auto; max-width: 90%; margin-top: 20px;">
+        {% for category, message in messages %}
+        {% set alert_type = category if category != 'message' else 'info' %}
+        <div class="alert alert-{{ alert_type }} alert-dismissible fade show animate__animated animate__fadeIn shadow-sm rounded-3"
+            role="alert">
+            <div class="d-flex align-items-center">
+                {% if category == 'success' %}
+                <i class="fas fa-check-circle me-2 text-success"></i>
+                {% elif category == 'danger' %}
+                <i class="fas fa-exclamation-circle me-2 text-danger"></i>
+                {% elif category == 'warning' %}
+                <i class="fas fa-exclamation-triangle me-2 text-warning"></i>
+                {% else %}
+                <i class="fas fa-info-circle me-2 text-info"></i>
+                {% endif %}
+                <span>{{ message }}</span>
+            </div>
+            <button type="button" class="btn-close" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- 主要内容 -->
+    {% block content %}{% endblock %}
+
+    <!-- 页脚 -->
+    <footer class="footer-section"
+        style="padding-top: 0.4rem; margin-top: 0.2rem; border-top: 1px solid rgba(0,0,0,0.1);">
+        <div class="container-fluid">
+            <div class="row g-1" style="padding-top: 0.4rem;">
+                <div class="col-lg-4 col-md-6 mb-1">
+                    <h5 class="footer-heading" style="font-size: 1.1rem; margin-top: 0.4rem; font-weight: 700;">狗狗年龄识别
+                    </h5>
+                    <p class="text-muted mb-1" style="font-size: 0.9rem;">我们致力于通过先进的图像识别技术，帮助您了解爱犬年龄，提供科学健康建议。</p>
+                    <div class="social-icons-container mb-1" style="border-bottom: none;">
+                        <a href="#" class="social-icon-modern weixin-icon"
+                            style="border-bottom: none; text-decoration: none;"><i class="fab fa-weixin"></i></a>
+                        <a href="#" class="social-icon-modern qq-icon"
+                            style="border-bottom: none; text-decoration: none;"><i class="fab fa-qq"></i></a>
+                        <a href="#" class="social-icon-modern weibo-icon"
+                            style="border-bottom: none; text-decoration: none;"><i class="fab fa-weibo"></i></a>
+                        <a href="#" class="social-icon-modern github-icon"
+                            style="border-bottom: none; text-decoration: none;"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-1 ps-lg-5">
+                    <h5 class="footer-heading" style="font-size: 1.1rem; margin-top: 0.4rem; font-weight: 700;">快速链接
+                    </h5>
+                    <ul class="list-unstyled footer-links" style="font-size: 0.9rem;">
+                        <li><a href="{{ url_for('main.index') }}"><i class="fas fa-home me-2"></i>首页</a></li>
+                        <li><a href="{{ url_for('dog.analyze') }}"><i class="fas fa-chart-bar me-2"></i>开始分析</a></li>
+                        {% if session.get('user_id') %}
+                        <li><a href="{{ url_for('dog.history') }}"><i class="fas fa-history me-2"></i>历史记录</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6 mb-1 ps-lg-0 pe-lg-4" style="margin-left: -50px; padding-right: 50px;">
+                    <h5 class="footer-heading" style="font-size: 1.1rem; margin-top: 0.4rem; font-weight: 700;">联系我们
+                    </h5>
+                    <ul class="list-unstyled footer-links" style="font-size: 0.9rem;">
+                        <li><a href="#"><i class="fas fa-map-marker-alt me-2"></i>河南省郑州市中原区莲花街100号</a></li>
+                        <li><a href="tel:123-456-7890"><i class="fas fa-phone-alt me-2"></i>123-456-7890</a></li>
+                        <li><a href="mailto:info@dogage.com"><i class="fas fa-envelope me-2"></i>info@dogage.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-1" style="margin-left: 50px;">
+                    <h5 class="footer-heading" style="font-size: 1.1rem; margin-top: 0.4rem; font-weight: 700;">订阅更新
+                    </h5>
+                    <form class="subscription-form-modern mb-1">
+                        <div class="input-group">
+                            <input type="email" class="form-control form-control-modern"
+                                style="font-size: 0.9rem; height: 32px;" placeholder="您的邮箱地址" required>
+                            <button class="btn btn-primary btn-sm subscription-submit-btn" type="submit"
+                                style="height: 32px; display: flex; align-items: center; justify-content: center;">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="newsletter-badge" style="font-size: 0.8rem; margin-top: 10px;">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>我们保护您的隐私</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-items-center py-1" style="border-top: none; margin-top: 0.6rem;">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="copyright-text mb-0" style="font-size: 0.8rem;">© 2025 狗狗年龄识别 - 保留所有权利</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <a href="#" id="back-to-top" class="back-to-top-btn">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS - Animate On Scroll -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- 自定义 JavaScript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+
+</html>

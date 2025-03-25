@@ -1,0 +1,412 @@
+{% extends 'base.html' %}
+
+{% block title %}狗狗年龄分析 - 结果{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode.js@1.0.0/qrcode.min.js"></script>
+<script src="{{ url_for('static', filename='js/result.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4 pb-2 position-relative">
+  <!-- 装饰元素 -->
+  <div class="position-absolute d-none d-lg-block" data-aos="fade-left" data-aos-duration="1000"
+    style="top: 15%; right: 5%; z-index: -1;">
+    <i class="fas fa-bone fa-3x text-primary opacity-10 icon-pulse"></i>
+  </div>
+  <div class="position-absolute d-none d-lg-block" data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200"
+    style="bottom: 10%; left: 5%; z-index: -1;">
+    <i class="fas fa-paw fa-4x text-primary opacity-10 icon-pulse"></i>
+  </div>
+
+  <!-- 二维码弹出层 - 用于微信分享 -->
+  <div id="qrcode-modal" class="qrcode-modal">
+    <div class="qrcode-container">
+      <div class="qrcode-header">
+        <h5>分享到微信</h5>
+        <button class="qrcode-close" id="qrcode-close"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="qrcode-body">
+        <div id="qrcode-display" class="qrcode-display"></div>
+        <p class="text-center mt-3 mb-1">请使用微信扫描上方二维码</p>
+        <div class="text-center">
+          <small class="text-muted">或截图后在微信中识别</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 页面标题 - 调整为与analyze一致的布局 -->
+  <div class="row justify-content-center mb-5">
+    <div class="col-lg-12">
+      <div class="page-header animate-fade-in text-center">
+        <h1 class="display-5 fw-bold gradient-text mb-3">分析结果</h1>
+        <p class="lead text-muted mb-4">以下是我们对您爱犬年龄的分析结果和健康建议</p>
+        <div class="d-flex justify-content-center">
+          <div class="badge bg-primary-light text-primary rounded-pill px-4 py-2 mb-2">
+            <i class="fas fa-chart-line me-2"></i>AI智能分析结果
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 锚点元素 - 用于页面跳转定位 -->
+  <div id="analysis-result" style="position: relative; top: -80px; height: 0; overflow: hidden;"></div>
+
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <!-- 结果卡片 - 全新设计 -->
+      <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-4">
+        <div class="card-body p-0">
+          <div class="result-card">
+            <!-- 上方标题区域保持不变 -->
+            <div class="result-header p-4 text-center">
+              <h2 class="mb-3">AI分析结果</h2>
+              <div class="result-age">{{ "%.1f"|format(analysis.estimated_age) }} 岁</div>
+              <p class="text-white-75">相当于人类 <span class="badge bg-white text-primary rounded-pill px-3 fw-semibold">
+                  {{ human_age }} 岁
+                </span></p>
+            </div>
+
+            <!-- 重新设计的主体区域 -->
+            <div class="result-body">
+              <div class="modern-layout">
+                <!-- 左侧：狗狗信息 -->
+                <div class="info-column">
+                  <div class="dog-profile">
+                    <div class="dog-avatar-container">
+                      <div class="avatar-decoration"></div>
+                      <div class="dog-avatar">
+                        <img src="{{ url_for('static', filename=analysis.photo_path) }}" alt="狗狗照片"
+                          class="dog-portrait">
+                      </div>
+                    </div>
+                    <div class="dog-details">
+                      {% if analysis.breed %}
+                      <div class="dog-breed">
+                        <span class="breed-badge">
+                          <i class="fas fa-dog me-1"></i> {{ analysis.breed }}
+                        </span>
+                      </div>
+                      {% endif %}
+                      <div class="dog-analysis-time">
+                        <i class="far fa-calendar-alt me-2"></i>
+                        <span>{{ analysis.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 右侧：生命阶段和操作按钮 -->
+                <div class="stage-column">
+                  <div class="life-stage-section">
+                    <div class="stage-title">
+                      <span>生命阶段</span>
+                      <span class="stage-badge">{{ life_stage }}</span>
+                    </div>
+                    <div class="stage-visualization" id="lifestage-progress" data-stage="{{ life_stage }}">
+                      <div class="stage-timeline">
+                        <div class="stage-point" data-stage="幼年期">
+                          <div class="point-marker"></div>
+                          <div class="point-label">幼年期</div>
+                          <div class="point-age">0-6个月</div>
+                        </div>
+                        <div class="stage-point" data-stage="青春期">
+                          <div class="point-marker"></div>
+                          <div class="point-label">青春期</div>
+                          <div class="point-age">6个月-1岁</div>
+                        </div>
+                        <div class="stage-point" data-stage="壮年期">
+                          <div class="point-marker"></div>
+                          <div class="point-label">壮年期</div>
+                          <div class="point-age">1-5岁</div>
+                        </div>
+                        <div class="stage-point" data-stage="中年期">
+                          <div class="point-marker"></div>
+                          <div class="point-label">中年期</div>
+                          <div class="point-age">5-10岁</div>
+                        </div>
+                        <div class="stage-point" data-stage="老年期">
+                          <div class="point-marker"></div>
+                          <div class="point-label">老年期</div>
+                          <div class="point-age">10-16岁</div>
+                        </div>
+                        <div class="progress-track">
+                          <div class="progress-line"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="action-section">
+                    <a href="{{ url_for('dog.analyze') }}?return_to_result=true" class="btn nav-action-btn btn-primary">
+                      <i class="fas fa-redo me-2"></i>
+                      <span>重新分析</span>
+                    </a>
+                    <a href="{{ url_for('dog.history') }}" class="btn nav-action-btn history-btn">
+                      <i class="fas fa-clock me-2"></i>
+                      <span>历史记录</span>
+                    </a>
+                    {% if not session.get('user_id') %}
+                    <a href="{{ url_for('auth.register') }}" class="btn nav-action-btn btn-outline-primary">
+                      <i class="fas fa-user-plus me-2"></i>
+                      <span>保存结果</span>
+                    </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 健康建议 -->
+      <div class="card mb-3 border-0 shadow-sm rounded-4 overflow-hidden health-tips-card">
+        <div class="card-header health-header d-flex align-items-center">
+          <i class="fas fa-heartbeat"></i>
+          <h5 class="mb-0">健康建议</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="health-tips-wrapper">
+            <div class="health-tips-content">
+              {% for tip in health_tips %}
+              <div class="tip-item">
+                <div class="tip-icon tip-icon-{{ loop.index }}">
+                  {% if loop.index == 1 %}
+                  <i class="fas fa-utensils"></i>
+                  {% elif loop.index == 2 %}
+                  <i class="fas fa-stethoscope"></i>
+                  {% elif loop.index == 3 %}
+                  <i class="fas fa-running"></i>
+                  {% elif loop.index == 4 %}
+                  <i class="fas fa-prescription-bottle-alt"></i>
+                  {% elif loop.index == 5 %}
+                  <i class="fas fa-shield-alt"></i>
+                  {% else %}
+                  <i class="fas fa-paw"></i>
+                  {% endif %}
+                </div>
+                <div class="tip-text">{{ tip }}</div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="health-disclaimer">
+              <i class="fas fa-info-circle"></i>
+              <span>这些建议仅供参考，具体问题请咨询专业兽医。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 侧边栏 -->
+    <div class="col-lg-4">
+      <!-- 年龄对照表 -->
+      <div class="card no-print border-0 shadow-lg rounded-4 share-card mb-3">
+        <div class="card-header bg-gradient-light">
+          <h5 class="mb-0 d-flex align-items-center"><i class="fas fa-calendar-alt me-2"></i>年龄对照表</h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted mb-3"><i class="fas fa-chart-bar me-2"></i>狗狗年龄与人类年龄的对应关系：</p>
+          <div class="table-responsive">
+            <table class="table age-table">
+              <thead>
+                <tr>
+                  <th class="stage-indicator"></th>
+                  <th>狗狗年龄</th>
+                  <th>人类年龄</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="stage-divider">
+                  <td colspan="3">
+                    <div class="stage-header"><i class="fas fa-baby"></i><span>幼年期</span></div>
+                  </td>
+                </tr>
+                <tr class="stage-puppy">
+                  <td class="stage-indicator"></td>
+                  <td>3周</td>
+                  <td><span class="age-badge">1岁</span></td>
+                </tr>
+                <tr class="stage-puppy">
+                  <td class="stage-indicator"></td>
+                  <td>6周</td>
+                  <td><span class="age-badge">2岁</span></td>
+                </tr>
+                <tr class="stage-puppy">
+                  <td class="stage-indicator"></td>
+                  <td>3个月</td>
+                  <td><span class="age-badge">5岁</span></td>
+                </tr>
+                <tr class="stage-puppy">
+                  <td class="stage-indicator"></td>
+                  <td>6个月</td>
+                  <td><span class="age-badge">5岁</span></td>
+                </tr>
+
+                <tr class="stage-divider">
+                  <td colspan="3">
+                    <div class="stage-header"><i class="fas fa-child"></i><span>青春期</span></div>
+                  </td>
+                </tr>
+                <tr class="stage-juvenile">
+                  <td class="stage-indicator"></td>
+                  <td>7个月</td>
+                  <td><span class="age-badge">8岁</span></td>
+                </tr>
+                <tr class="stage-juvenile">
+                  <td class="stage-indicator"></td>
+                  <td>9个月</td>
+                  <td><span class="age-badge">10岁</span></td>
+                </tr>
+                <tr class="stage-juvenile">
+                  <td class="stage-indicator"></td>
+                  <td>10个月</td>
+                  <td><span class="age-badge">13岁</span></td>
+                </tr>
+                <tr class="stage-juvenile">
+                  <td class="stage-indicator"></td>
+                  <td>1岁</td>
+                  <td><span class="age-badge">15岁</span></td>
+                </tr>
+
+                <tr class="stage-divider">
+                  <td colspan="3">
+                    <div class="stage-header"><i class="fas fa-running"></i><span>壮年期</span></div>
+                  </td>
+                </tr>
+                <tr class="stage-adult">
+                  <td class="stage-indicator"></td>
+                  <td>1岁6个月</td>
+                  <td><span class="age-badge">17岁</span></td>
+                </tr>
+                <tr class="stage-adult">
+                  <td class="stage-indicator"></td>
+                  <td>2岁</td>
+                  <td><span class="age-badge">20岁</span></td>
+                </tr>
+                <tr class="stage-adult">
+                  <td class="stage-indicator"></td>
+                  <td>3岁</td>
+                  <td><span class="age-badge">23岁</span></td>
+                </tr>
+                <tr class="stage-adult">
+                  <td class="stage-indicator"></td>
+                  <td>4岁</td>
+                  <td><span class="age-badge">28岁</span></td>
+                </tr>
+                <tr class="stage-adult">
+                  <td class="stage-indicator"></td>
+                  <td>5岁</td>
+                  <td><span class="age-badge">32岁</span></td>
+                </tr>
+
+                <tr class="stage-divider">
+                  <td colspan="3">
+                    <div class="stage-header"><i class="fas fa-user"></i><span>中年期</span></div>
+                  </td>
+                </tr>
+                <tr class="stage-middle">
+                  <td class="stage-indicator"></td>
+                  <td>6岁</td>
+                  <td><span class="age-badge">36岁</span></td>
+                </tr>
+                <tr class="stage-middle">
+                  <td class="stage-indicator"></td>
+                  <td>7岁</td>
+                  <td><span class="age-badge">40岁</span></td>
+                </tr>
+                <tr class="stage-middle">
+                  <td class="stage-indicator"></td>
+                  <td>8岁</td>
+                  <td><span class="age-badge">44岁</span></td>
+                </tr>
+                <tr class="stage-middle">
+                  <td class="stage-indicator"></td>
+                  <td>9岁</td>
+                  <td><span class="age-badge">48岁</span></td>
+                </tr>
+                <tr class="stage-middle">
+                  <td class="stage-indicator"></td>
+                  <td>10岁</td>
+                  <td><span class="age-badge">52岁</span></td>
+                </tr>
+
+                <tr class="stage-divider">
+                  <td colspan="3">
+                    <div class="stage-header"><i class="fas fa-user-tie"></i><span>老年期</span></div>
+                  </td>
+                </tr>
+                <tr class="stage-senior">
+                  <td class="stage-indicator"></td>
+                  <td>11岁</td>
+                  <td><span class="age-badge">56岁</span></td>
+                </tr>
+                <tr class="stage-senior">
+                  <td class="stage-indicator"></td>
+                  <td>12岁</td>
+                  <td><span class="age-badge">60岁</span></td>
+                </tr>
+                <tr class="stage-senior">
+                  <td class="stage-indicator"></td>
+                  <td>13岁</td>
+                  <td><span class="age-badge">64岁</span></td>
+                </tr>
+                <tr class="stage-senior">
+                  <td class="stage-indicator"></td>
+                  <td>14岁</td>
+                  <td><span class="age-badge">68岁</span></td>
+                </tr>
+                <tr class="stage-senior">
+                  <td class="stage-indicator"></td>
+                  <td>15岁</td>
+                  <td><span class="age-badge">72岁</span></td>
+                </tr>
+                <tr class="stage-senior">
+                  <td class="stage-indicator"></td>
+                  <td>16岁</td>
+                  <td><span class="age-badge">80岁</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <small class="text-muted">注：表格根据狗狗生命阶段划分，年龄对应关系参考科学研究数据。</small>
+        </div>
+      </div>
+
+      <!-- 分享结果 -->
+      <div class="card no-print border-0 shadow-lg rounded-4 share-card mb-2">
+        <div class="card-header bg-gradient-light">
+          <h5 class="mb-0 d-flex align-items-center"><i class="fas fa-paper-plane me-2"></i>分享结果</h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted mb-3"><i class="fas fa-share-alt me-2"></i>选择分享方式：</p>
+          <div class="share-buttons d-flex justify-content-start gap-3">
+            <a href="#" data-share="wechat" class="share-button-minimal" title="分享到微信">
+              <i class="fab fa-weixin"></i>
+            </a>
+            <a href="#" data-share="qq" class="share-button-minimal" title="分享到QQ">
+              <i class="fab fa-qq"></i>
+            </a>
+            <a href="#" data-share="weibo" class="share-button-minimal" title="分享到微博">
+              <i class="fab fa-weibo"></i>
+            </a>
+            <a href="#" data-share="copy" class="share-button-minimal" title="复制链接">
+              <i class="fas fa-link"></i>
+            </a>
+          </div>
+          <div id="share-success-message" class="alert alert-success mt-3 d-none">
+            <i class="fas fa-check-circle me-2"></i>链接已复制到剪贴板!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
