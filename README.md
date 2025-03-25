@@ -129,7 +129,7 @@ FLUSH PRIVILEGES;
 
 1. 克隆仓库
 ```
-git clone https://github.com/yourusername/dog_age_analyzer.git
+git clone https://github.com/shishenbiaosha/dog_age_analyzer.git
 cd dog_age_analyzer
 ```
 
